@@ -11,7 +11,7 @@ App = React.createClass({
   render() {
     return (
       <div>
-        <AccountsUIWrapper />
+        <Navbar />
         <Dashboard currentUser={this.data.currentUser}/>
         {this.props.content}
       </div>

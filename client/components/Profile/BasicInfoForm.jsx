@@ -80,7 +80,7 @@ BasicInfoForm = React.createClass({
           <input ref="desiredCity" type="text" placeholder="Desired City" onChange={this._onChange} name="desiredCity" value={this.state.desiredCity}/>
           <input ref="desiredState" type="text" placeholder="Desired State" onChange={this._onChange} name="desiredState" value={this.state.desiredState}/>
           <textarea ref="bio" value={this.state.bio} name="bio" onChange={this._onChange}></textarea>
-          <input type="submit" value="Update Info"/>
+          <input className="button" type="submit" value="Update Info"/>
         </form>
       </div>
     )
