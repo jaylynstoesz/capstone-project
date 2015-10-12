@@ -7,7 +7,7 @@ $white: #FFFFFF;
 $blackish: #666;
 $gray: #777;
 
-body {
+body, input, textarea {
   color: $blackish;
 }
 
@@ -21,12 +21,23 @@ body {
   background-color: $primary-dark;
 }
 
-input {
+input, textarea {
   border: 1px solid $gray;
 }
 
-input:focus {
+input:focus, select:focus {
     outline: none !important;
     border: 1px solid $primary;
     box-shadow: 0 0 4px $primary;
+}
+
+select, option {
+  background-color: $primary;
+  color: $white;
+}
+
+form {
+  h5 {
+    color: $primary;
+  }
 }

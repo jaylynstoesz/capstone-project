@@ -2,16 +2,15 @@
   box-sizing: border-box;
 }
 
-.container {
-  padding: 20px;
-  display: inline-block;
+#edit-profile-button {
+  position: absolute;
+  left: 80%;
 }
 
-// #dashboard-component {
-//   width: 40%;
-//   float: left;
-// }
-//
-// #profile-component {
-//   width: 60%;
-// }
+#basic-info {
+  text-align: center;
+  width: 100%;
+  form {
+    margin-left: 15%;
+  }
+}

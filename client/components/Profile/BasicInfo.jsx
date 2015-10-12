@@ -3,11 +3,9 @@ BasicInfo = React.createClass({
   renderInfo() {
     var profile = this.props.profile.profile
     return (
-      <div id="container basic-info">
-        <h1>{profile.firstName} {profile.lastName}</h1>
-        <h3>{profile.cohortType}{profile.cohortNumber} - {profile.cohortLocation}</h3>
-        <h3>{profile.currentCity}, {profile.currentState}</h3>
-        <h3>{profile.jobTitle} at {profile.company}</h3>
+      <div className="container" id="basic-info">
+        <h1>{profile.firstName} {profile.lastName} - {profile.cohortType}{profile.cohortNumber}</h1>
+        <p>{profile.jobTitle} at {profile.company} in {profile.currentCity}, {profile.currentState}</p>
       </div>
     )
   },

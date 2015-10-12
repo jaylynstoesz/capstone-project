@@ -10,7 +10,7 @@ JobInfo = React.createClass({
           <li>Full stack</li>
         </ul>
         <h3>About</h3>
-        <h3>{profile.bio}</h3>
+        <p>{profile.bio}</p>
       </div>
     )
   },

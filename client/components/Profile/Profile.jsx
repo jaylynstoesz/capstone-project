@@ -34,8 +34,8 @@ Profile = React.createClass({
   renderProfile() {
     var currentProfile = this.getProfile()
     return (
-      <div className="container col-7" id="profile-component">
-        {this.props.editable ? <div className="button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : null}
+      <div className="container col-8" id="profile-component">
+        {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : null}
         {this.state.editing ? <BasicInfoForm profile={currentProfile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
       </div>
     )
