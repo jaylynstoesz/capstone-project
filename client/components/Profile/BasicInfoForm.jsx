@@ -1,42 +1,34 @@
 BasicInfoForm = React.createClass({
-  getInitialState() {
-    var profile = this.props.profile || {}
-    return {
-      firstName: profile.firstName || "",
-      lastName: profile.lastName || "",
-      cohortType: profile.cohortType || "",
-      cohortNumber: profile.cohortNumber || "",
-      currentCity: profile.currentCity || "",
-      currentState: profile.currentState || "",
-      jobTitle: profile.jobTitle || "",
-      company: profile.company || "",
-      desiredCity: profile.desiredCity || "",
-      desiredState: profile.desiredState || "",
-      bio: profile.bio || "",
-      canSubmit: false
-    }
+  allFields() {
+    return ["firstName", "lastName", "cohortType", "cohortNumber", "currentCity", "currentState", "jobTitle", "company", "desiredCity", "desiredState", "bio"]
   },
 
-  enableSubmit() {
-    this.setState({canSubmit: true})
+  getInitialState() {
+    var allFields = this.allFields()
+    var profile = this.props.profile || {}
+    var formFields = {}
+    for (var i = 0; i < allFields.length; i++) {
+      formFields[allFields[i]] = profile[allFields[i]] || ""
+    }
+    return formFields
   },
 
   handleSubmit(event) {
     event.preventDefault();
     var userObject = {}
-    userObject.firstName = React.findDOMNode(this.refs.firstName).value.trim();
-    userObject.lastName = React.findDOMNode(this.refs.lastName).value.trim();
-    userObject.cohortType = React.findDOMNode(this.refs.cohortType).value.trim();
-    userObject.cohortNumber = React.findDOMNode(this.refs.cohortNumber).value.trim();
-    userObject.currentCity = React.findDOMNode(this.refs.currentCity).value.trim();
-    userObject.currentState = React.findDOMNode(this.refs.currentState).value.trim().toUpperCase();
-    userObject.jobTitle = React.findDOMNode(this.refs.jobTitle).value.trim();
-    userObject.company = React.findDOMNode(this.refs.company).value.trim();
-    userObject.desiredCity = React.findDOMNode(this.refs.desiredCity).value.trim();
-    userObject.desiredState = React.findDOMNode(this.refs.desiredState).value.trim().toUpperCase();
-    userObject.bio = React.findDOMNode(this.refs.bio).value.trim();
-
+    var allFields = this.allFields()
+    for (var i = 0; i < allFields.length; i++) {
+      var DOMNode = React.findDOMNode(this.refs[allFields[i]]).value.trim()
+      if (allFields[i] === "currentState" || allFields[i] === "desiredState") {
+        DOMNode = DOMNode.toUpperCase()
+      }
+      userObject[allFields[i]] = DOMNode
+    }
     this.props.submitForm(userObject)
+  },
+
+  componentDidMount() {
+    this.validateForm()
   },
 
   render() {
@@ -46,7 +38,7 @@ BasicInfoForm = React.createClass({
           <div className="col-8">
             <h5>Basic Information </h5>
           </div>
-          <input className="col-4" ref="firstName" type="text" placeholder="First Name" onChange={this._onChange} name="firstName" value={this.state.firstName}/>
+          <input className="col-4" ref="firstName" type="text" placeholder="First Name" onChange={this._onChange} name="firstName" value={this.state.firstName} />
           <input className="col-4" ref="lastName" type="text" placeholder="Last Name" onChange={this._onChange} name="lastName" value={this.state.lastName}/>
           <div className="col-8">
             <select className="col-5" ref="cohortType" value={this.state.cohortType} onChange={this._onChange} name="cohortType" >
@@ -89,7 +81,7 @@ BasicInfoForm = React.createClass({
           </div>
           <textarea className="col-8" ref="bio" value={this.state.bio} name="bio" maxLength="500" onChange={this._onChange} rows="5"></textarea>
           <div className="col-8">
-            <input className="button" type="submit" value="Update Info"/>
+          <input id="submitButton" className="button disabled" type="submit" value="Update Info" disabled={!this.state.canSubmit}/>
           </div>
         </form>
       </div>
@@ -101,8 +93,22 @@ BasicInfoForm = React.createClass({
   // <input type="checkbox" value="Back End">Back End</input>
   // <input type="checkbox" value="Data Science">Data Science</input>
   //
+  validateForm() {
+    this.setState({canSubmit: true})
+    $("#submitButton").removeClass("disabled")
+    var allFields = this.allFields()
+    for (var i = 0; i < allFields.length; i++) {
+      var DOMNode = React.findDOMNode(this.refs[allFields[i]])
+      if (DOMNode.value === "") {
+        $("#submitButton").addClass("disabled")
+        this.setState({canSubmit: false})
+      }
+    }
+  },
 
   _onChange: function() {
+    this.validateForm()
+    validateField(event.target)
     var setModifier = {}
     setModifier[event.target.name] = event.target.value
     this.setState(setModifier);
