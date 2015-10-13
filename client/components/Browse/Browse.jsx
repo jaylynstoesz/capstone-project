@@ -17,7 +17,8 @@ Browse = React.createClass({
         {id: "fortCollins", checked: true, name: "Fort Collins"},
         {id: "sanFrancisco", checked: true, name: "San Francisco"},
         {id: "seattle", checked: true, name: "Seattle"}
-      ]
+      ],
+      sortBy: "firstName",
     }
   },
 
@@ -44,7 +45,16 @@ Browse = React.createClass({
   },
 
   renderUsers() {
-    var allUsers = this.data.allUsers
+    allUsers = this.data.allUsers.sort(function (a, b) {
+      var sortBy = this.state.sortBy
+      if (a.profile[sortBy] > b.profile[sortBy]) {
+        return 1;
+      }
+      if (a.profile[sortBy] < b.profile[sortBy]) {
+        return -1;
+      }
+      return 0;
+    }.bind(this))
     return allUsers.map((user) => {
       for (var i = 0; i < this.state.campuses.length; i++) {
         if (user.profile.cohortLocation === this.state.campuses[i].name && this.state.campuses[i].checked) {
@@ -66,14 +76,32 @@ Browse = React.createClass({
     })
   },
 
+  _onChange() {
+    this.setState({sortBy: React.findDOMNode(this.refs.sortBy).value})
+  },
+
   render() {
     return (
       <div className="container col-8 browse-component">
-        <div className="container col-2 browse-inner">
-          <h4>Campuses</h4>
-          <table>
-            {this.renderCampuses()}
-          </table>
+        <div className="container col-3 browse-inner">
+          <div className="container col-10">
+            <h5>Sort By: </h5>
+            <select ref="sortBy" value={this.state.sortBy} onChange={this._onChange} >
+              <option value="firstName">First Name</option>
+              <option value="lastName">Last Name</option>
+              <option value="cohortType">Program</option>
+              <option value="corhortNumber">Cohort Number</option>
+              <option value="currentCity">City</option>
+              <option value="currentState">State</option>
+              <option value="company">Company</option>
+            </select>
+          </div>
+          <div className="container col-10">
+            <h4>Campuses</h4>
+            <table>
+              {this.renderCampuses()}
+            </table>
+          </div>
         </div>
         <div className="container col-5 browse-inner" id="user-list">
           {this.renderUsers()}
