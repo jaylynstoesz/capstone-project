@@ -2,6 +2,34 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+}
+
+.browse-inner, .profile-component {
+  height: 44em;
+  overflow: scroll;
+}
+
+.navbar-component {
+  h3, h5 {
+    margin: 0;
+    margin-left: 30px;
+    display: inline-block;
+  }
+  #login-buttons {
+    position: absolute;
+    left: 80%;
+    text-align: right;
+  }
+  #login-dropdown-list, .accounts-dialog {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    left: 0;
+  }
+}
+
 #edit-profile-button {
   position: absolute;
   left: 80%;

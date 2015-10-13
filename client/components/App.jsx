@@ -11,8 +11,8 @@ App = React.createClass({
   render() {
     return (
       <div>
-        <Navbar />
-        <Dashboard currentUser={this.data.currentUser}/>
+        <Navbar currentUser={this.data.currentUser ? this.data.currentUser : null}/>
+        <Dashboard currentUser={this.data.currentUser ? this.data.currentUser : null}/>
         {this.props.content}
       </div>
     )

@@ -1,8 +1,16 @@
 Browse = React.createClass({
 
+  mixins: [ReactMeteorData],
+
+  getMeteorData() {
+    return {
+      allUsers: Meteor.users.find({}, {sort: {firstName: 1}}).fetch()
+    }
+  },
+
   getInitialState() {
     return {
-      locations: [
+      campuses: [
         {id: "boulder", checked: true, name: "Boulder"},
         {id: "denverPlatte", checked: true, name: "Denver - Platte"},
         {id: "denverGolden", checked: true, name: "Denver - Golden Triangle"},
@@ -14,43 +22,43 @@ Browse = React.createClass({
   },
 
   renderCampuses() {
-    var allCampuses = this.state.locations
+    var allCampuses = this.state.campuses
     return allCampuses.map((campus) => {
       return (
         <tr key={campus.id}>
-          <td><input type="checkbox" id={campus.id} name={campus.name} checked={campus.checked} onChange={this.toggleChecked}/></td>
+          <td><input type="checkbox" id={campus.id} name={campus.name} checked={campus.checked} onChange={this.toggleCampus}/></td>
           <td><label htmlFor={campus.id}>{campus.name}</label></td>
         </tr>
       )
     })
   },
 
-  toggleChecked() {
-    var locations = this.state.locations
-    for (var i = 0; i < locations.length; i++) {
-      if (locations[i].id === event.target.id) {
-        this.setState(locations[i] = {id: locations[i].id, checked: event.target.checked, name: locations[i].name})
+  toggleCampus() {
+    var campuses = this.state.campuses
+    for (var i = 0; i < campuses.length; i++) {
+      if (campuses[i].id === event.target.id) {
+        campuses[i].checked = event.target.checked
+        this.forceUpdate()
       }
     }
   },
 
   renderUsers() {
-    var allUsers = Meteor.users.find({}).fetch()
+    var allUsers = this.data.allUsers
     return allUsers.map((user) => {
-      for (var i = 0; i < this.state.locations.length; i++) {
-        if (user.profile.cohortLocation === this.state.locations[i].name && this.state.locations[i].checked) {
+      for (var i = 0; i < this.state.campuses.length; i++) {
+        if (user.profile.cohortLocation === this.state.campuses[i].name && this.state.campuses[i].checked) {
           user.viewing = true
         }
       }
       if (user.viewing) {
-      console.log(user);
         return (
           <a key={user._id} user={user} href={"/users/" + user._id}>
             <div className="container col-10">
               <h2>{user.profile.firstName} {user.profile.lastName}</h2>
               <p>{user.profile.cohortType}{user.profile.cohortNumber} at {user.profile.cohortLocation}</p>
               <p>{user.profile.jobTitle} at {user.profile.company}</p>
-              <p>{user.profile.currentCity}, {user.profile.currentState}</p>
+              <p>Located in {user.profile.currentCity}, {user.profile.currentState}</p>
             </div>
           </a>
         )
@@ -60,14 +68,14 @@ Browse = React.createClass({
 
   render() {
     return (
-      <div>
-        <div className="container col-2">
+      <div className="container col-8 browse-component">
+        <div className="container col-2 browse-inner">
           <h4>Campuses</h4>
           <table>
             {this.renderCampuses()}
           </table>
         </div>
-        <div className="container col-5" id="user-list">
+        <div className="container col-5 browse-inner" id="user-list">
           {this.renderUsers()}
         </div>
       </div>
