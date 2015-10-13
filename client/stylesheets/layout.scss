@@ -6,16 +6,44 @@ body {
   margin: 0;
 }
 
-.browse-inner, .profile-component {
+.profile-component, .dashboard, .dashboard-component, .spacer {
   height: 44em;
+}
+
+.dashboard {
+  background-color: blue;
+  height: 44em;
+  position: absolute;
+}
+
+.dashboard-max {
+  width: 20%;
+}
+.dashboard-min {
+  width: 4%;
+}
+
+.browse-inner {
+  height: 41em;
+}
+
+.browse-inner, .profile-component {
   overflow: scroll;
 }
 
 .navbar-component {
+  height: 5em;
   h3, h5 {
     margin: 0;
     margin-left: 30px;
     display: inline-block;
+  }
+  img {
+    height: 1.5em;
+    display: inline-block;
+    margin: 0;
+    margin-right: 10px;
+    vertical-align: middle;
   }
   #login-buttons {
     position: absolute;
@@ -31,8 +59,7 @@ body {
 }
 
 #edit-profile-button {
-  position: absolute;
-  left: 80%;
+  float: right;
 }
 
 #basic-info {

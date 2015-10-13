@@ -5,7 +5,7 @@ Navbar = React.createClass({
         <div className="container">
           <div className="col-6">
             <a href={"/users"}>
-              <h3>gSchool Alumni Network</h3>
+              <h3><img src="/images/galvanize.png"></img> Alumni Network</h3>
             </a>
           </div>
           <div className="col-4">

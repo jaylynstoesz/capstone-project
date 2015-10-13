@@ -34,18 +34,34 @@ body {
   background-color: $gray;
 }
 
+.disabled:hover {
+  background-color: $blackish;
+}
+
 .navbar-component {
   background: $black;
-  opacity: 0.6;
+  opacity: 1.0;
 
   a, h1, h2, h3, h4, h5 {
     color: $white;
   }
 
+  #login-dropdown-list, .accounts-dialog {
+    opacity: 1.0;
+    a {
+      color: $blackish;
+    }
+  }
+
   #login-buttons .login-button, .accounts-dialog .login-button {
     background: $primary;
     border: $primary-dark;
+    opacity: 1.0;
   }
+}
+
+.dashboard {
+  background-color: $blackish;
 }
 
 .profile-component, .browse-component {

@@ -82,29 +82,31 @@ Browse = React.createClass({
 
   render() {
     return (
-      <div className="container col-8 browse-component">
-        <div className="container col-3 browse-inner">
-          <div className="container col-10">
-            <h5>Sort By: </h5>
-            <select ref="sortBy" value={this.state.sortBy} onChange={this._onChange} >
-              <option value="firstName">First Name</option>
-              <option value="lastName">Last Name</option>
-              <option value="cohortType">Program</option>
-              <option value="corhortNumber">Cohort Number</option>
-              <option value="currentCity">City</option>
-              <option value="currentState">State</option>
-              <option value="company">Company</option>
-            </select>
+      <div>
+        <div className="container col-6 browse-component">
+          <div className="container col-4 browse-inner">
+            <div className="container col-10">
+              <h5>Sort By: </h5>
+              <select ref="sortBy" value={this.state.sortBy} onChange={this._onChange} >
+                <option value="firstName">First Name</option>
+                <option value="lastName">Last Name</option>
+                <option value="cohortType">Program</option>
+                <option value="corhortNumber">Cohort Number</option>
+                <option value="currentCity">City</option>
+                <option value="currentState">State</option>
+                <option value="company">Company</option>
+              </select>
+            </div>
+            <div className="container col-10">
+              <h4>Campuses</h4>
+              <table>
+                {this.renderCampuses()}
+              </table>
+            </div>
           </div>
-          <div className="container col-10">
-            <h4>Campuses</h4>
-            <table>
-              {this.renderCampuses()}
-            </table>
+          <div className="container col-5 browse-inner" id="user-list">
+            {this.renderUsers()}
           </div>
-        </div>
-        <div className="container col-5 browse-inner" id="user-list">
-          {this.renderUsers()}
         </div>
       </div>
     )
