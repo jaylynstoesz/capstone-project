@@ -1,5 +1,5 @@
 input, textarea {
-  width: 100%;
+  // width: 100%;
   padding: 10px;
   border-radius: 2px;
   margin: 5px;
@@ -10,7 +10,19 @@ input, textarea {
 
 input {
   height: 40px;
+  vertical-align: middle;
+  display: inline-block;
 }
+
+table {
+  border-collapse: collapse;
+}
+
+td {
+  padding: 2px;
+  vertical-align: middle;
+}
+
 form {
   text-align: left;
   h4 {

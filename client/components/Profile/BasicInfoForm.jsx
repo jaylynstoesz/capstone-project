@@ -1,6 +1,19 @@
 BasicInfoForm = React.createClass({
   allFields() {
-    return ["firstName", "lastName", "cohortType", "cohortNumber", "currentCity", "currentState", "jobTitle", "company", "desiredCity", "desiredState", "bio"]
+    return [
+      "firstName",
+      "lastName",
+      "cohortType",
+      "cohortNumber",
+      "cohortLocation",
+      "currentCity",
+      "currentState",
+      "jobTitle",
+      "company",
+      "desiredCity",
+      "desiredState",
+      "bio"
+    ]
   },
 
   getInitialState() {
@@ -41,7 +54,7 @@ BasicInfoForm = React.createClass({
           <input className="col-4" ref="firstName" type="text" placeholder="First Name" onChange={this._onChange} name="firstName" value={this.state.firstName} />
           <input className="col-4" ref="lastName" type="text" placeholder="Last Name" onChange={this._onChange} name="lastName" value={this.state.lastName}/>
           <div className="col-8">
-            <select className="col-5" ref="cohortType" value={this.state.cohortType} onChange={this._onChange} name="cohortType" >
+            <select className="col-3" ref="cohortType" value={this.state.cohortType} onChange={this._onChange} name="cohortType" >
               <option value="g">Full Stack</option>
               <option value="D">Data Science</option>
               <option value="gU">GalvanizeU</option>
@@ -59,6 +72,14 @@ BasicInfoForm = React.createClass({
               <option value="10">10</option>
               <option value="11">11</option>
               <option value="12">12</option>
+            </select>
+            <select className="col-4" ref="cohortLocation" value={this.state.cohortLocation} onChange={this._onChange} name="cohortLocation" >
+              <option value="Boulder">Boulder</option>
+              <option value="Denver - Platte">Denver - Platte</option>
+              <option value="Denver - Golden Triangle">Denver - Golden Triangle</option>
+              <option value="Fort Collins">Fort Collins</option>
+              <option value="San Francisco">San Francisco</option>
+              <option value="Seattle">Seattle</option>
             </select>
           </div>
           <div className="col-8">
@@ -81,7 +102,7 @@ BasicInfoForm = React.createClass({
           </div>
           <textarea className="col-8" ref="bio" value={this.state.bio} name="bio" maxLength="500" onChange={this._onChange} rows="5"></textarea>
           <div className="col-8">
-          <input id="submitButton" className="button disabled" type="submit" value="Update Info" disabled={!this.state.canSubmit}/>
+          <input id="submit-button" className="button disabled" type="submit" value="Update Info" disabled={!this.state.canSubmit}/>
           </div>
         </form>
       </div>
@@ -95,12 +116,12 @@ BasicInfoForm = React.createClass({
   //
   validateForm() {
     this.setState({canSubmit: true})
-    $("#submitButton").removeClass("disabled")
+    $("#submit-button").removeClass("disabled")
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]])
       if (DOMNode.value === "") {
-        $("#submitButton").addClass("disabled")
+        $("#submit-button").addClass("disabled")
         this.setState({canSubmit: false})
       }
     }
