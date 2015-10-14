@@ -28,11 +28,12 @@ if (Meteor.isServer) {
     },
 
     updateTodo: function (todoObject) {
-      var props = Object.keys(userObject)
+      var props = Object.keys(todoObject)
       var setModifier = {};
       for (var i = 0; i < props.length; i++) {
         setModifier[props[i]] = todoObject[props[i]]
       }
+      console.log("***************", setModifier, "***************");
       Todos.update(todoObject._id, { $set: setModifier })
     },
 

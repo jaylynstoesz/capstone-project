@@ -4,7 +4,7 @@ Browse = React.createClass({
 
   getMeteorData() {
     return {
-      allUsers: Meteor.users.find({}, {sort: {firstName: 1}}).fetch()
+      allUsers: Meteor.users.find({_id: {$ne: Meteor.userId()}}, {sort: {firstName: 1}}).fetch()
     }
   },
 

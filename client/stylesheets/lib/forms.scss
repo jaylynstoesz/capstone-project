@@ -1,14 +1,14 @@
-input, textarea {
-  // width: 100%;
+input, textarea, #submit-button {
   padding: 10px;
   border-radius: 2px;
-  margin: 5px;
+  margin-left: 5px;
+  margin-top: 7px;
   margin-bottom: 0;
   margin-right: 0;
   display: inline-block;
 }
 
-input {
+input,  #submit-button {
   height: 35px;
   vertical-align: middle;
   display: inline-block;

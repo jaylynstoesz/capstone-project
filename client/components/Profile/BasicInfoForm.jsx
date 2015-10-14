@@ -102,7 +102,7 @@ BasicInfoForm = React.createClass({
           </div>
           <textarea className="col-8" ref="bio" value={this.state.bio} name="bio" maxLength="500" onChange={this._onChange} rows="5"></textarea>
           <div className="col-8">
-          <input id="submit-button" className="button disabled" type="submit" value="Update Info" disabled={!this.state.canSubmit}/>
+          <button id="submit-button" className="button disabled" type="submit" disabled={!this.state.canSubmit}>Update Info</button>
           </div>
         </form>
       </div>

@@ -16,6 +16,18 @@ body {
   background-image: url("/images/DenverSkyline.png")
 }
 
+.fa {
+  color: $primary;
+  cursor: pointer;
+}
+.fa:hover {
+  color: $primary-dark;
+}
+
+.fa-plus, .fa-plus:hover, .fa-check, .fa-check:hover {
+  color: $white !important;
+}
+
 .todo {
   background-color: $blackish;
 }
@@ -68,12 +80,6 @@ body {
   color: $white;
 }
 
-.fa-remove {
-  color: $primary;
-}
-.fa-remove:hover {
-  color: $primary-dark;
-}
 
 .profile-component, .browse-component {
   background-color: $white;
@@ -83,7 +89,7 @@ input, textarea {
   border: 1px solid $gray;
 }
 
-input:focus, select:focus {
+input:focus, select:focus, button:focus {
     outline: none !important;
     border: 1px solid $primary;
     box-shadow: 0 0 4px $primary;
