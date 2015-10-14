@@ -16,6 +16,10 @@ body {
   background-image: url("/images/DenverSkyline.png")
 }
 
+.todo {
+  background-color: $blackish;
+}
+
 .button {
   background-color: $primary;
   color: $white;
@@ -56,13 +60,19 @@ body {
   #login-buttons .login-button, .accounts-dialog .login-button {
     background: $primary;
     border: $primary-dark;
-    opacity: 1.0;
   }
 }
 
 .dashboard {
-  background-color: $blackish;
+  background-color: transparentize($black, 0.3);
   color: $white;
+}
+
+.fa-remove {
+  color: $primary;
+}
+.fa-remove:hover {
+  color: $primary-dark;
 }
 
 .profile-component, .browse-component {

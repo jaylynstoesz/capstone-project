@@ -35,8 +35,6 @@ Dashboard = React.createClass({
     React.findDOMNode(this.refs.deadline).value = ""
   },
 
-
-
   renderTodos() {
     var allTodos = this.data.allTodos
     return allTodos.map((todo) => {
@@ -49,23 +47,34 @@ Dashboard = React.createClass({
   renderTodoForm() {
     return (
       <div className="col-9" id="todos">
-        <form onSubmit={this.handleSubmit}>
-          <input className="col-10" ref="text" type="text" placeholder="Add a new to-do"></input>
-          <label htmlFor="deadline">Choose a deadline (optional)</label>
-          <input className="col-7" ref="deadline" type="date" name="deadline"></input>
-          <input className="col-1" type="submit" className="button button-small" value="+"></input>
+        <form>
+          <input className="col-9" ref="text" type="text" placeholder="Add a new to-do"></input>
+          <label htmlFor="deadline">Deadline (optional)</label>
+          <div>
+            <input className="col-7" ref="deadline" type="date" name="deadline"></input>
+            <span className="button button-small fa fa-plus" onClick={this.handleSubmit}></span>
+          </div>
         </form>
       </div>
     )
+  },
+
+  toggleDash() {
+    $("#dashboard").toggleClass("dashboard-open")
   },
 
   render() {
     return (
       <div>
         <div className="col-2 dashboard-component">
-          <div className="col-2 container dashboard" id="dash">
-            {this.renderTodoForm()}
-            {this.renderTodos()}
+          <div className="col-2 container dashboard" id="dashboard">
+            <div onClick={this.toggleDash}>
+              <h1 className="fa fa-bars"></h1>
+            </div>
+            <div id="todos-list">
+              {this.renderTodoForm()}
+              {this.renderTodos()}
+            </div>
           </div>
         </div>
       </div>

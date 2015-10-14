@@ -6,11 +6,11 @@ Todo = React.createClass({
   render() {
     var todo = this.props.todo
     return (
-      <div>
-        <p>{todo.text}</p>
-        <p><b>{todo.deadline ? todo.deadline : null}</b></p>
-        <button onClick={this.destroyTodo}>X</button>
-      </div>
+        <div className="todo col-8">
+          <span onClick={this.destroyTodo} className="fa fa-remove"></span>
+          <p>{todo.text}</p>
+          <p><b>{todo.deadline ? "Due: " + todo.deadline : null}</b></p>
+        </div>
     )
   }
 })

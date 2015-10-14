@@ -7,7 +7,15 @@ body {
 }
 
 .button-small {
-  width: 20%;
+  width: 16%;
+}
+
+.fa-bars {
+  float: right;
+}
+
+.fa-remove {
+  float: right;
 }
 
 .profile-component, .dashboard, .dashboard-component, .spacer {
@@ -17,12 +25,12 @@ body {
 .dashboard {
   height: 44em;
   position: absolute;
-  left: -15%;
+  left: -16%;
   -webkit-transition: 0.2s;
 }
 
-.dashboard:hover {
-  -webkit-transform: translate(75%);
+.dashboard-open {
+  -webkit-transform: translate(80%);
   -webkit-transition: 0.2s;
 }
 
@@ -32,6 +40,12 @@ body {
 
 .browse-inner, .profile-component {
   overflow: scroll;
+}
+
+.todo {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
 }
 
 .navbar-component {
@@ -71,4 +85,9 @@ body {
   form {
     margin-left: 15%;
   }
+}
+
+#todos-list {
+  overflow: scroll;
+  height: 41em;
 }
