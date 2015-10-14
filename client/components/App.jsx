@@ -13,6 +13,7 @@ App = React.createClass({
       <div>
         <Navbar currentUser={this.data.currentUser ? this.data.currentUser : null}/>
         <Dashboard currentUser={this.data.currentUser ? this.data.currentUser : null} />
+        {this.data.currentUser ? <ContactDash currentUser={this.data.currentUser} /> : null}
         {this.props.content}
       </div>
     )

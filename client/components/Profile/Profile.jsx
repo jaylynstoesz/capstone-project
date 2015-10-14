@@ -3,6 +3,7 @@ Profile = React.createClass({
   getInitialState() {
     return {
       editing: false,
+      saved: false
     }
   },
 
@@ -10,6 +11,10 @@ Profile = React.createClass({
     this.setState({profile: this.getProfile()})
     if (!this.getProfile().profile && this.props.editable) {
       this.setState({editing: true})
+    }
+    console.log(Meteor.user);
+    if (Meteor.user().profile.contacts && Meteor.user().profile.contacts.indexOf(this.props.page) >= 0) {
+      this.setState({saved : true})
     }
   },
 
@@ -31,12 +36,21 @@ Profile = React.createClass({
     this.setState({editing: !this.state.editing});
   },
 
+  toggleContact() {
+    if (!this.state.saved) {
+      Meteor.call("addContact", this.props.page)
+    } else {
+      Meteor.call("removeContact", this.props.page)
+    }
+    this.setState({saved: !this.state.saved})
+  },
+
   renderProfile() {
     var currentProfile = this.getProfile()
     return (
       <div>
         <div className="container col-6 profile-component">
-          {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : null}
+          {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>{this.state.saved ? "Remove from contacts" : "Add to contacts"}</div>}
           {this.state.editing ? <BasicInfoForm profile={currentProfile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
         </div>
       </div>

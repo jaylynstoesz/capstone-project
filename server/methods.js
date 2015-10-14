@@ -18,6 +18,24 @@ if (Meteor.isServer) {
       Meteor.users.update(Meteor.user()._id, { $set: setModifier })
     },
 
+    addContact: function (userId) {
+      var currentContacts = Meteor.user().contacts || []
+      if (currentContacts.indexOf(userId) < 0) {
+        currentContacts.push(userId)
+      }
+      Meteor.users.update(Meteor.user()._id, { $set: {contacts: currentContacts} })
+      console.log(currentContacts);
+    },
+
+    removeContact: function (userId) {
+      var currentContacts = Meteor.user().contacts || []
+      currentContacts.filter(function (contact) {
+        return contact !== userId
+      })
+      Meteor.users.update(Meteor.user()._id, { $set: {contacts: currentContacts} })
+      console.log(currentContacts);
+    },
+
     createTodo: function (todoObject) {
       if (! Meteor.userId()) {
         throw new Meteor.Error("not-authorized");

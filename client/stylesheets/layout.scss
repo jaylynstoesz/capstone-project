@@ -22,19 +22,29 @@ body {
   float: right;
 }
 
-.profile-component, .dashboard, .dashboard-component, .spacer {
+.profile-component, .dashboard, .dashboard-right, .dashboard-component, .spacer {
   height: 44em;
 }
 
 .dashboard {
-  height: 44em;
   position: absolute;
   left: -16%;
   -webkit-transition: 0.2s;
 }
 
+.dashboard-right {
+  position: absolute;
+  left: 96%;
+  -webkit-transition: 0.2s;
+}
+
 .dashboard-open {
   -webkit-transform: translate(80%);
+  -webkit-transition: 0.2s;
+}
+
+.dashboard-right-open {
+  -webkit-transform: translate(-80%);
   -webkit-transition: 0.2s;
 }
 

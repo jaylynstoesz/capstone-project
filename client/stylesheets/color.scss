@@ -75,7 +75,7 @@ body {
   }
 }
 
-.dashboard {
+.dashboard, .dashboard-right {
   background-color: transparentize($black, 0.3);
   color: $white;
 }
