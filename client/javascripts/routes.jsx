@@ -14,7 +14,6 @@ FlowRouter.route('/users', {
 
 FlowRouter.route('/users/:id', {
   action: function(params) {
-    // console.log("!!!", Meteor.users.findOne({_id: Meteor.userId()}));
     ReactLayout.render(App, {
       content: <Profile editable={Meteor.userId() === params.id} page={params.id}/>
     }, document.getElementById('render-app'))

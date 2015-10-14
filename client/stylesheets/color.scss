@@ -28,8 +28,11 @@ body {
   color: $white !important;
 }
 
-.todo {
+.todo, .contact {
   background-color: $blackish;
+  a {
+    color: $white;
+  }
 }
 
 .button {

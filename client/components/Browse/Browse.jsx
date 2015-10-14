@@ -47,12 +47,8 @@ Browse = React.createClass({
   renderUsers() {
     allUsers = this.data.allUsers.sort(function (a, b) {
       var sortBy = this.state.sortBy
-      if (a.profile[sortBy] > b.profile[sortBy]) {
-        return 1;
-      }
-      if (a.profile[sortBy] < b.profile[sortBy]) {
-        return -1;
-      }
+      if (a.profile[sortBy] > b.profile[sortBy]) { return 1 }
+      if (a.profile[sortBy] < b.profile[sortBy]) { return -1 }
       return 0;
     }.bind(this))
     return allUsers.map((user) => {

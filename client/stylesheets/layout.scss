@@ -18,8 +18,12 @@ body {
   float: left;
 }
 
-.fa-remove {
+.fa-remove, .fa-envelope {
   float: right;
+}
+
+.fa-envelope {
+  padding: 5px;
 }
 
 .profile-component, .dashboard, .dashboard-right, .dashboard-component, .spacer {
@@ -56,7 +60,7 @@ body {
   overflow: scroll;
 }
 
-.todo {
+.todo, .contact {
   margin: 5px;
   padding: 5px;
   border-radius: 3px;
@@ -105,7 +109,7 @@ body {
   }
 }
 
-#todos-list {
+#todos-list, #contact-list {
   overflow: scroll;
   height: 41em;
 }
