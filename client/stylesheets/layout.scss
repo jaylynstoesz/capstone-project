@@ -6,21 +6,24 @@ body {
   margin: 0;
 }
 
+.button-small {
+  width: 20%;
+}
+
 .profile-component, .dashboard, .dashboard-component, .spacer {
   height: 44em;
 }
 
 .dashboard {
-  background-color: blue;
   height: 44em;
   position: absolute;
+  left: -15%;
+  -webkit-transition: 0.2s;
 }
 
-.dashboard-max {
-  width: 20%;
-}
-.dashboard-min {
-  width: 4%;
+.dashboard:hover {
+  -webkit-transform: translate(75%);
+  -webkit-transition: 0.2s;
 }
 
 .browse-inner {

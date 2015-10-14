@@ -1,8 +1,7 @@
-
 if (Meteor.isServer) {
-  // Meteor.publish("todos", function () {
-  //   return Todos.find();
-  // });
+  Meteor.publish("todos", function () {
+    return Todos.find({});
+  });
 
   Meteor.publish("userData", function () {
     return Meteor.users.find({})
@@ -11,12 +10,34 @@ if (Meteor.isServer) {
   Meteor.methods({
 
     updateUserProfile: function (userObject) {
-      var foo = Object.keys(userObject)
+      var props = Object.keys(userObject)
       var setModifier = {};
-      for (var i = 0; i < foo.length; i++) {
-        setModifier["profile." + foo[i]] = userObject[foo[i]]
+      for (var i = 0; i < props.length; i++) {
+        setModifier["profile." + props[i]] = userObject[props[i]]
       }
       Meteor.users.update(Meteor.user()._id, { $set: setModifier })
+    },
+
+    createTodo: function (todoObject) {
+      if (! Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
+      todoObject.owner = Meteor.userId()
+      todoObject.createdAt = new Date()
+      Todos.insert(todoObject)
+    },
+
+    updateTodo: function (todoObject) {
+      var props = Object.keys(userObject)
+      var setModifier = {};
+      for (var i = 0; i < props.length; i++) {
+        setModifier[props[i]] = todoObject[props[i]]
+      }
+      Todos.update(todoObject._id, { $set: setModifier })
+    },
+
+    destroyTodo: function (todoId) {
+      Todos.remove({_id: todoId})
     },
 
     testMe: function () {
