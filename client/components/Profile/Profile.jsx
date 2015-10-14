@@ -12,10 +12,9 @@ Profile = React.createClass({
     if (!this.getProfile().profile && this.props.editable) {
       this.setState({editing: true})
     }
-    console.log(Meteor.user);
-    if (Meteor.user().profile.contacts && Meteor.user().profile.contacts.indexOf(this.props.page) >= 0) {
-      this.setState({saved : true})
-    }
+    // if (this.getProfile().profile.contacts && this.getProfile().profile.contacts.indexOf(this.props.page) >= 0) {
+    //   this.setState({saved : true})
+    // }
   },
 
   getProfile() {

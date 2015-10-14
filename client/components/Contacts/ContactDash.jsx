@@ -4,8 +4,9 @@ ContactDash = React.createClass({
 
   getMeteorData() {
     var contactList = this.props.currentUser.contacts || []
+
     return {
-      allUContacts: Meteor.users.find({_id: {$in: contactList }}, {sort: {firstName: 1}}).fetch()
+      allContacts: Meteor.users.find({_id: {$in: contactList }}, {sort: {firstName: 1}}).fetch()
     }
   },
 
@@ -15,22 +16,18 @@ ContactDash = React.createClass({
     }
   },
 
-  // renderTodos() {
-  //   var allContacts = this.data.allContacts
-  //   return allContacts.map((todo) => {
-  //     return (
-  //       <Todo key={todo._id} todo={todo} />
-  //     )
-  //   })
-  // },
-
-  // renderTodoForm() {
-  //   return (
-  //     <div className="col-9" id="todos">
-  //       <TodoForm type="create"/>
-  //     </div>
-  //   )
-  // },
+  renderContacts() {
+    var allContacts = this.data.allContacts
+    return allContacts.map((contact) => {
+      console.log(contact.profile);
+      return (
+        <div key={contact._id} contact={contact}>
+          <a href={"/users/" + contact._id}>
+            <p>{contact.profile.firstName} {contact.profile.lastName}</p></a>
+        </div>
+      )
+    })
+  },
 
   toggleDash() {
     $("#dashboard-right").toggleClass("dashboard-right-open")
@@ -44,7 +41,9 @@ ContactDash = React.createClass({
             <div onClick={this.toggleDash}>
               <h1 className="fa fa-users"></h1>
             </div>
-
+            <div>
+              {this.renderContacts()}
+            </div>
           </div>
         </div>
       </div>

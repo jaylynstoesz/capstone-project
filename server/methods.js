@@ -29,11 +29,10 @@ if (Meteor.isServer) {
 
     removeContact: function (userId) {
       var currentContacts = Meteor.user().contacts || []
-      currentContacts.filter(function (contact) {
+      var contactRemoved = currentContacts.filter(function (contact) {
         return contact !== userId
       })
-      Meteor.users.update(Meteor.user()._id, { $set: {contacts: currentContacts} })
-      console.log(currentContacts);
+      Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
     },
 
     createTodo: function (todoObject) {
