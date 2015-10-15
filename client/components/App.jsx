@@ -8,6 +8,10 @@ App = React.createClass({
     }
   },
 
+  componentWillMount() {
+    console.log("mounting app component");
+  },
+
   render() {
     return (
       <div>

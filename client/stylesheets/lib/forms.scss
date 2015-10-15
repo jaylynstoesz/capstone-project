@@ -1,4 +1,4 @@
-input, textarea, #submit-button {
+input, textarea, #submit-todo-button, #submit-info-button {
   padding: 10px;
   border-radius: 2px;
   margin-left: 5px;
@@ -8,14 +8,17 @@ input, textarea, #submit-button {
   display: inline-block;
 }
 
-input,  #submit-button {
+input,  #submit-todo-button, #submit-info-button {
   height: 35px;
   vertical-align: middle;
-  display: inline-block;
 }
 
 table {
   border-collapse: collapse;
+}
+
+label {
+  padding: 5px;
 }
 
 td {

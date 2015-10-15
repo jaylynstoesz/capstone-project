@@ -9,6 +9,13 @@ if (Meteor.isServer) {
 
   Meteor.methods({
 
+    readUser: function (userId) {
+      Meteor.users.find({_id: userId}).then(function (result) {
+        console.log(result);
+        return result
+      })
+    },
+
     updateUserProfile: function (userObject) {
       var props = Object.keys(userObject)
       var setModifier = {};

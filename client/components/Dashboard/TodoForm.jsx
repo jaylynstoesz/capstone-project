@@ -23,12 +23,12 @@ TodoForm = React.createClass({
 
   validateForm() {
     this.setState({canSubmit: true})
-    $("#submit-button").removeClass("disabled")
+    $("#submit-todo-button").removeClass("disabled")
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]])
       if (DOMNode.value === "" && DOMNode.required) {
-        $("#submit-button").addClass("disabled")
+        $("#submit-todo-button").addClass("disabled")
         this.setState({canSubmit: false})
       }
     }
@@ -64,12 +64,12 @@ TodoForm = React.createClass({
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input className="col-9" ref="text" name="text" type="text" placeholder="Add a new to-do" value={this.state.text} onChange={this._onChange} required></input>
+      <form className="col-9" onSubmit={this.handleSubmit}>
+        <input className="col-10" ref="text" name="text" type="text" placeholder="Add a new to-do" value={this.state.text} onChange={this._onChange} required></input>
         <label htmlFor="deadline">Deadline (optional)</label>
-        <div>
-          <input className="col-7" ref="deadline" name="deadline" type="date" name="deadline" value={this.state.deadline} onChange={this._onChange}></input>
-          <button id="submit-button" className={this.props.type === "create" ? "button button-small" : "button  col-2"} type="submit" value="Update Info" disabled={!this.state.canSubmit}><span className={this.props.type === "create" ? "fa fa-plus" : "fa fa-check"}></span></button>
+        <div className="col-10">
+        <input className="col-6 deadline" ref="deadline" name="deadline" type="date" name="deadline" value={this.state.deadline} onChange={this._onChange}></input>
+        <button type="submit" disabled={!this.state.canSubmit} hidden></button>
         </div>
       </form>
     )

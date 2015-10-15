@@ -9,21 +9,14 @@ ContactDash = React.createClass({
     }
   },
 
-  getInitialState() {
-    return {
-      viewing: false
-    }
-  },
-
   renderContacts() {
     var allContacts = this.data.allContacts
     return allContacts.map((contact) => {
-      console.log(contact.profile);
       return (
-        <div key={contact._id} contact={contact} className="col-10 contact">
+        <div key={contact._id} contact={contact} className="col-8 contact">
           <a href={"/users/" + contact._id}>
               <span className="fa fa-envelope"> </span>
-              <p><b>{contact.profile.firstName} {contact.profile.lastName}</b></p>
+              <p><b>{contact.profile.firstName} {contact.profile.lastName} - {contact.profile.cohortType}{contact.profile.cohortNumber}</b></p>
               <p>{contact.profile.currentCity}, {contact.profile.currentState} - {contact.profile.company}</p>
           </a>
         </div>
@@ -40,10 +33,13 @@ ContactDash = React.createClass({
       <div>
         <div className="col-2 contact-dashboard-component">
           <div className="col-2 container dashboard-right" id="dashboard-right">
-            <div onClick={this.toggleDash}>
-              <h1 className="fa fa-users">Your Contacts</h1>
+            <div className="col-2" onClick={this.toggleDash}>
+              <h1 className="fa fa-users"></h1>
             </div>
-            <div id="contact-list">
+            <div className="col-8 contact-header">
+              <h3>Contacts</h3>
+            </div>
+            <div className="col-10" id="contact-list">
               {this.renderContacts()}
             </div>
           </div>

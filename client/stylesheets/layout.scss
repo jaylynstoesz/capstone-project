@@ -6,19 +6,11 @@ body {
   margin: 0;
 }
 
-.button-small {
-  width: 16%;
-}
-
-.fa-bars {
-  float: right;
-}
-
 .fa-pencil {
   float: left;
 }
 
-.fa-remove, .fa-envelope {
+.fa-bars, .fa-remove, .fa-envelope, .contact, .contact-header {
   float: right;
 }
 
@@ -26,38 +18,37 @@ body {
   padding: 5px;
 }
 
-.profile-component, .dashboard, .dashboard-right, .dashboard-component, .spacer {
-  height: 44em;
+.profile-component, .browse-component, .dashboard, .dashboard-right, .dashboard-component, .spacer {
+  height: 52em;
+  h3 {
+    margin-top: 0px;
+  }
+}
+
+.profile-component {
+  overflow: scroll;
 }
 
 .dashboard {
   position: absolute;
-  left: -16%;
+  left: -16.5%;
   -webkit-transition: 0.2s;
 }
 
 .dashboard-right {
   position: absolute;
-  left: 96%;
+  left: 96.5%;
   -webkit-transition: 0.2s;
 }
 
 .dashboard-open {
-  -webkit-transform: translate(80%);
+  -webkit-transform: translate(82.5%);
   -webkit-transition: 0.2s;
 }
 
 .dashboard-right-open {
-  -webkit-transform: translate(-80%);
+  -webkit-transform: translate(-82.5%);
   -webkit-transition: 0.2s;
-}
-
-.browse-inner {
-  height: 41em;
-}
-
-.browse-inner, .profile-component {
-  overflow: scroll;
 }
 
 .todo, .contact {
@@ -97,8 +88,8 @@ body {
   }
 }
 
-#edit-profile-button {
-  float: right;
+#edit-profile-button, #add-contact-button {
+  margin: 0 auto;
 }
 
 #basic-info {
@@ -109,7 +100,7 @@ body {
   }
 }
 
-#todos-list, #contact-list {
+#todos-list, #contact-list, .browse-inner {
   overflow: scroll;
-  height: 41em;
+  height: 50em;
 }

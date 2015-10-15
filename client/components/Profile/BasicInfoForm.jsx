@@ -102,7 +102,7 @@ BasicInfoForm = React.createClass({
           </div>
           <textarea className="col-8" ref="bio" value={this.state.bio} name="bio" maxLength="500" onChange={this._onChange} rows="5"></textarea>
           <div className="col-8">
-          <button id="submit-button" className="button disabled" type="submit" disabled={!this.state.canSubmit}>Update Info</button>
+          <button id="submit-info-button" className="button disabled" type="submit" disabled={!this.state.canSubmit}>Update Info</button>
           </div>
         </form>
       </div>
@@ -116,12 +116,12 @@ BasicInfoForm = React.createClass({
   //
   validateForm() {
     this.setState({canSubmit: true})
-    $("#submit-button").removeClass("disabled")
+    $("#submit-info-button").removeClass("disabled")
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]])
       if (DOMNode.value === "") {
-        $("#submit-button").addClass("disabled")
+        $("#submit-info-button").addClass("disabled")
         this.setState({canSubmit: false})
       }
     }

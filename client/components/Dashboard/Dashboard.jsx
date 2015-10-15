@@ -8,12 +8,6 @@ Dashboard = React.createClass({
     }
   },
 
-  getInitialState() {
-    return {
-      viewing: false
-    }
-  },
-
   renderTodos() {
     var allTodos = this.data.allTodos
     return allTodos.map((todo) => {
@@ -43,6 +37,7 @@ Dashboard = React.createClass({
             <div onClick={this.toggleDash}>
               <h1 className="fa fa-bars"></h1>
             </div>
+            <h3>To-Do List</h3>
             <div id="todos-list">
               {this.renderTodoForm()}
               {this.renderTodos()}

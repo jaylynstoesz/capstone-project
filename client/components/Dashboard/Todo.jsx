@@ -15,7 +15,7 @@ Todo = React.createClass({
 
   renderTodo() {
     return (
-      <div>
+      <div className="todo col-8">
         <div className="col-10">
           <span onClick={this.destroyTodo} className="fa fa-remove"> </span>
           <span onClick={this.toggleForm} className="fa fa-pencil"> </span>
@@ -31,7 +31,7 @@ Todo = React.createClass({
   render() {
     var todo = this.props.todo
     return (
-        <div className="todo col-8">
+        <div>
           {this.state.editing ? <TodoForm type="update" todo={this.props.todo} toggleForm={this.toggleForm}/> : this.renderTodo() }
         </div>
     )

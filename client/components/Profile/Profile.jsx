@@ -1,5 +1,14 @@
 Profile = React.createClass({
 
+  mixins: [ReactMeteorData],
+
+  getMeteorData() {
+    return {
+      currentUser: this.getProfile(this.props.currentUser),
+      profile: this.getProfile(this.props.page)
+    }
+  },
+
   getInitialState() {
     return {
       editing: false,
@@ -7,19 +16,20 @@ Profile = React.createClass({
     }
   },
 
-  componentWillMount() {
-    this.setState({profile: this.getProfile()})
-    if (!this.getProfile().profile && this.props.editable) {
+  componentDidMount() {
+    this.setState({profile: this.data.profile})
+    this.setState({currentUser: this.data.currentUser})
+    if (!this.data.profile.profile && this.props.editable) {
       this.setState({editing: true})
     }
-    // if (this.getProfile().profile.contacts && this.getProfile().profile.contacts.indexOf(this.props.page) >= 0) {
-    //   this.setState({saved : true})
-    // }
+    if (this.data.currentUser.contacts && this.data.currentUser.contacts.indexOf(this.props.page) >= 0) {
+      this.setState({saved : true})
+    }
   },
 
-  getProfile() {
-    if (Meteor.users.findOne({ _id: this.props.page }) !== undefined) {
-      return Meteor.users.findOne({ _id: this.props.page });
+  getProfile(userId) {
+    if (Meteor.users.findOne({ _id: userId }) !== undefined) {
+      return Meteor.users.findOne({ _id: userId });
     } else {
       return false
     }
@@ -27,8 +37,10 @@ Profile = React.createClass({
 
   submitForm(userObject) {
     Meteor.call("updateUserProfile", userObject)
-    this.setState({profile: this.getProfile()})
-    this.toggleBasicForm()
+    setTimeout(function () {
+      this.setState({profile: this.data.profile})
+      this.toggleBasicForm()
+    }.bind(this), 100)
   },
 
   toggleBasicForm() {
@@ -45,23 +57,23 @@ Profile = React.createClass({
   },
 
   renderProfile() {
-    var currentProfile = this.getProfile()
+    var profile = this.data.profile
     return (
       <div>
         <div className="container col-6 profile-component">
-          {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>{this.state.saved ? "Remove from contacts" : "Add to contacts"}</div>}
-          {this.state.editing ? <BasicInfoForm profile={currentProfile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
+          {this.state.editing ? <BasicInfoForm profile={profile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
         </div>
       </div>
     )
   },
 
   renderBasicInfo() {
-    var currentProfile = this.getProfile()
+    var profile = this.data.profile
     return (
       <div>
-        <BasicInfo profile={currentProfile}/>
-        <JobInfo profile={currentProfile}/>
+        <BasicInfo profile={profile}/>
+        {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>{this.state.saved ? "Remove contact" : "Save contact"}</div>}
+        <JobInfo profile={profile}/>
       </div>
     )
   },
