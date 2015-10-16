@@ -15,11 +15,11 @@ http://gschool_alumni_network.meteor.com/
 
 ## Atmosphere Packages
 - React
-- Kadira:ReactLayout
-- Kadira:FlowRouter
 - Accounts-UI
+- HTTP
+- Email
+- Kadira:FlowRouter
+- Kadira:ReactLayout
 - OKGrow: Promise
 - FourSeven: SCSS
 - FontAwesome
-- HTTP
-- Email
