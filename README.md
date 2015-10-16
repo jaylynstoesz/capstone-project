@@ -6,6 +6,9 @@ The app is a small social network for the purpose of connecting gSchool alumni. 
 
 Future features will include drag-and-drop functionality from skills and interests lists to the to-do list, embedded code snippets, job listings, OAuth integration with LinkedIn and Github, and activity notifications.
 
+## Production Link
+http://gschool_alumni_network.meteor.com/
+
 ## Technologies used
 - React
 - Meteor
