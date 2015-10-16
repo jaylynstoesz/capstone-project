@@ -12,7 +12,8 @@ BasicInfoForm = React.createClass({
       "company",
       "desiredCity",
       "desiredState",
-      "bio"
+      "bio",
+      "jobType"
     ]
   },
 
@@ -93,6 +94,15 @@ BasicInfoForm = React.createClass({
           <input className="col-7" ref="currentCity" type="text" placeholder="Current City" onChange={this._onChange} name="currentCity" value={this.state.currentCity}/>
           <input className="col-1" ref="currentState" type="text" placeholder="State" maxLength="2" onChange={this._onChange} name="currentState" value={this.state.currentState}/>
           <div className="col-8">
+            <h5>What do you want to do? </h5>
+            <select className="col-4" ref="jobType" value={this.state.jobType} onChange={this._onChange} name="jobType">
+              <option value="Full Stack development">Full Stack</option>
+              <option value="Front End development">Front End</option>
+              <option value="Back End development">Back End</option>
+              <option value="Data Science">Data Science</option>
+            </select>
+          </div>
+          <div className="col-8">
             <h5>Where do you want to be? </h5>
           </div>
           <input className="col-7" ref="desiredCity" type="text" placeholder="Desired City" onChange={this._onChange} name="desiredCity" value={this.state.desiredCity}/>
@@ -108,12 +118,7 @@ BasicInfoForm = React.createClass({
       </div>
     )
   },
-  //
-  // <input type="checkbox" value="Full Stack">Full Stack</input>
-  // <input type="checkbox" value="Front End">Front End</input>
-  // <input type="checkbox" value="Back End">Back End</input>
-  // <input type="checkbox" value="Data Science">Data Science</input>
-  //
+
   validateForm() {
     this.setState({canSubmit: true})
     $("#submit-info-button").removeClass("disabled")

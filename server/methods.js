@@ -7,14 +7,13 @@ if (Meteor.isServer) {
     return Meteor.users.find({})
   });
 
+  Meteor.publish("skills", function () {
+    return Skills.find({})
+  });
+
   Meteor.methods({
 
-    readUser: function (userId) {
-      Meteor.users.find({_id: userId}).then(function (result) {
-        console.log(result);
-        return result
-      })
-    },
+    ////// User Methods //////
 
     updateUserProfile: function (userObject) {
       var props = Object.keys(userObject)
@@ -22,25 +21,51 @@ if (Meteor.isServer) {
       for (var i = 0; i < props.length; i++) {
         setModifier["profile." + props[i]] = userObject[props[i]]
       }
+      console.log("***************", setModifier, "****************");
       Meteor.users.update(Meteor.user()._id, { $set: setModifier })
     },
 
     addContact: function (userId) {
-      var currentContacts = Meteor.user().contacts || []
-      if (currentContacts.indexOf(userId) < 0) {
-        currentContacts.push(userId)
+      var contactList = Meteor.user().contacts || []
+      if (contactList.indexOf(userId) < 0) {
+        contactList.push(userId)
       }
-      Meteor.users.update(Meteor.user()._id, { $set: {contacts: currentContacts} })
+      Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactList} })
       console.log(currentContacts);
     },
 
     removeContact: function (userId) {
-      var currentContacts = Meteor.user().contacts || []
-      var contactRemoved = currentContacts.filter(function (contact) {
+      var contactList = Meteor.user().contacts || []
+      var contactRemoved = contactList.filter(function (contact) {
         return contact !== userId
       })
       Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
     },
+
+    ////// Skills Methods //////
+
+    createSkill: function (text) {
+      Skills.insert(text.toLowerCase())
+    },
+
+    addSkillToUser: function (skillId) {
+      var skillList = Meteor.user().skills || []
+      if (skillList.indexOf(skillId) < 0) {
+        skillList.push(skillId)
+      }
+      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
+      console.log(skillList);
+    },
+
+    removeSkillFromUser: function (skillId) {
+      var skillList = Meteor.user().skills || []
+      var skillRemoved = skillsList.filter(function (skill) {
+        return skill !== skillId
+      })
+      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillRemoved} })
+    },
+
+    ////// Todo Methods //////
 
     createTodo: function (todoObject) {
       if (! Meteor.userId()) {

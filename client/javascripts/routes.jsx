@@ -15,7 +15,7 @@ FlowRouter.route('/users', {
 FlowRouter.route('/users/:id', {
   action: function(params) {
     ReactLayout.render(App, {
-      content: <Profile editable={Meteor.userId() === params.id} page={params.id} currentUser={Meteor.userId()}/>
+      content: <Profile key={Meteor.userId()} editable={Meteor.userId() === params.id} page={params.id} currentUser={Meteor.userId()}/>
     }, document.getElementById('render-app'))
   }
 })

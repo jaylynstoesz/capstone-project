@@ -4,13 +4,13 @@ JobInfo = React.createClass({
     var profile = this.props.profile.profile
     return (
       <div id="job-info">
-        <h3>Seeking a position in {profile.desiredCity}, {profile.desiredState}</h3>
-        <ul>
-          <li>Front end</li>
-          <li>Full stack</li>
-        </ul>
-        <h3>About</h3>
-        <p>{profile.bio}</p>
+        <div>
+          <h4>About</h4>
+          <p>{profile.bio}</p>
+        </div>
+        <div>
+          <h4>Interested in {profile.jobType} in {profile.desiredCity}, {profile.desiredState}</h4>
+        </div>
       </div>
     )
   },

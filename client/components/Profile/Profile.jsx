@@ -12,7 +12,7 @@ Profile = React.createClass({
   getInitialState() {
     return {
       editing: false,
-      saved: false
+      saved: false,
     }
   },
 
@@ -71,9 +71,15 @@ Profile = React.createClass({
     var profile = this.data.profile
     return (
       <div>
+        {this.props.editable ?
+          <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>
+            {this.state.editing ? "Cancel" : "Edit Info"}
+          </div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>
+            {this.state.saved ? "Remove contact" : "Save contact"}
+          </div>}
         <BasicInfo profile={profile}/>
-        {this.props.editable ? <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>{this.state.editing ? "Cancel" : "Edit Profile"}</div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>{this.state.saved ? "Remove contact" : "Save contact"}</div>}
         <JobInfo profile={profile}/>
+        <SkillsForm />
       </div>
     )
   },

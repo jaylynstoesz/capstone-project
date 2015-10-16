@@ -25,6 +25,14 @@ body {
   }
 }
 
+.info-open {
+  background-color: blue;
+}
+
+.info-closed {
+  background-color: red;
+}
+
 .profile-component {
   overflow: scroll;
 }
@@ -89,7 +97,7 @@ body {
 }
 
 #edit-profile-button, #add-contact-button {
-  margin: 0 auto;
+  float: right;
 }
 
 #basic-info {
@@ -101,6 +109,6 @@ body {
 }
 
 #todos-list, #contact-list, .browse-inner {
-  overflow: scroll;
-  height: 50em;
+  overflow: scroll !important;
+  height: 47em;
 }

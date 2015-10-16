@@ -88,6 +88,15 @@ body {
   background-color: $white;
 }
 
+.skill {
+  background-color: $blackish;
+  color: $white;
+}
+
+.skill:hover {
+  background-color: $black;
+}
+
 input, textarea {
   border: 1px solid $gray;
 }
