@@ -70,7 +70,8 @@ SkillsForm = React.createClass({
     event.preventDefault()
     var DOMNode = React.findDOMNode(this.refs.text).value.trim()
     console.log(DOMNode);
-    Meteor.call("addSkillToUser", DOMNode)
+    Meteor.call("createSkill", DOMNode)
+    // Meteor.call("addSkillToUser", DOMNode)
     // Meteor.call("createSkill", DOMNode, function (error, result) {
     //   console.log();
     // })

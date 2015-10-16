@@ -45,13 +45,14 @@ if (Meteor.isServer) {
     ////// Skills Methods //////
 
     createSkill: function (text) {
-      Skills.insert({text: text})
+      return Skills.insert({text: text}).then(function (response) {
+        console.log("!!!!!!!!!!!!!!!!", response);
+        return response
+      })
     },
 
     addSkillToUser: function (text) {
-      if (Skills.findOne({text: text})) {
         Skills.findOne({text: text})
-      }
       // var skillList = Meteor.user().skills || []
       // if (skillList.indexOf(skillId) < 0) {
       //   skillList.push(skillId)
