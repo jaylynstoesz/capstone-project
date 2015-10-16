@@ -51,8 +51,7 @@ SkillsForm = React.createClass({
   },
 
   _onClick() {
-    this.setState({skillSelect: []})
-    this.setState({text: event.target.id})
+    this.handleSubmit(event)
   },
 
   _onMouseOver() {
@@ -62,26 +61,30 @@ SkillsForm = React.createClass({
   _onChange() {
     this.validateForm()
     validateField(event.target)
-    this.setState({text: event.target.value})
+    this.setState({text: event.target.value}, )
     this.setState({skillSelect: fuzzyMatch(this.data.allSkills, event.target.value, 1)})
   },
 
   handleSubmit(event) {
     event.preventDefault()
     var DOMNode = React.findDOMNode(this.refs.text).value.trim()
-    console.log(DOMNode);
-    Meteor.call("createSkill", DOMNode)
-    // Meteor.call("addSkillToUser", DOMNode)
-    // Meteor.call("createSkill", DOMNode, function (error, result) {
-    //   console.log();
-    // })
-    // React.findDOMNode(this.refs.text).value = ""
+    Meteor.promise("createSkill", DOMNode).then(function (result) {
+      var skillId
+      if (typeof result === "string") {
+        skillId = result
+      } else {
+        skillId = result._id
+      }
+      Meteor.call("addSkillToUser", skillId)
+    })
+    this.setState({text: ""})
+    this.setState({skillSelect: []})
   },
 
   render() {
     return (
-      <form className="col-3" onSubmit={this.handleSubmit}>
-        <input className="col-10" ref="text" name="text" type="text" placeholder="Add a new skill, tool, or technology" value={this.state.text} onChange={this._onChange} onBlur={this._onBlur} required></input>
+      <form className="col-10" onSubmit={this.handleSubmit}>
+        <input className="col-6" ref="text" name="text" type="text" placeholder="Add a new skill, tool, or technology" value={this.state.text} onChange={this._onChange} onBlur={this._onBlur} required></input>
         <button type="submit" id="sumbit-skill-button" disabled={!this.state.canSubmit} hidden></button>
         <div>
           {this.renderSkillSelect()}

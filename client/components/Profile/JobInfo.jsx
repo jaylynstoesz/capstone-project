@@ -9,7 +9,8 @@ JobInfo = React.createClass({
           <p>{profile.bio}</p>
         </div>
         <div>
-          <h4>Interested in {profile.jobType} in {profile.desiredCity}, {profile.desiredState}</h4>
+          <h4>Interests</h4>
+          <p>{profile.jobType} in {profile.desiredCity}, {profile.desiredState}</p>
         </div>
       </div>
     )

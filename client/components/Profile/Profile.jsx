@@ -78,9 +78,12 @@ Profile = React.createClass({
             {this.state.saved ? "Remove contact" : "Save contact"}
           </div>}
         <BasicInfo profile={profile}/>
-        <JobInfo profile={profile}/>
-        <SkillsForm />
-        <SkillsInfo profile={profile} />
+        <div className="col-5">
+          <JobInfo profile={profile}/>
+          <h4>Skills</h4>
+          {this.props.editable? <SkillsForm /> : null }
+          <SkillsInfo profile={profile} />
+        </div>
       </div>
     )
   },

@@ -45,25 +45,24 @@ if (Meteor.isServer) {
     ////// Skills Methods //////
 
     createSkill: function (text) {
-      return Skills.insert({text: text}).then(function (response) {
-        console.log("!!!!!!!!!!!!!!!!", response);
-        return response
-      })
+      if (Skills.findOne({text: text}) === undefined) {
+        return Skills.insert({text: text})
+      } else {
+        return (Skills.findOne({text: text}));
+      }
     },
 
-    addSkillToUser: function (text) {
-        Skills.findOne({text: text})
-      // var skillList = Meteor.user().skills || []
-      // if (skillList.indexOf(skillId) < 0) {
-      //   skillList.push(skillId)
-      // }
-      // Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
-      // console.log(skillList);
+    addSkillToUser: function (skillId) {
+      var skillList = Meteor.user().skills || []
+      if (skillList.indexOf(skillId) < 0) {
+        skillList.push(skillId)
+      }
+      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
     },
 
     removeSkillFromUser: function (skillId) {
       var skillList = Meteor.user().skills || []
-      var skillRemoved = skillsList.filter(function (skill) {
+      var skillRemoved = skillList.filter(function (skill) {
         return skill !== skillId
       })
       Meteor.users.update(Meteor.user()._id, { $set: {skills: skillRemoved} })
