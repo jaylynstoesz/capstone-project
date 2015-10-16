@@ -35,7 +35,7 @@ SkillsForm = React.createClass({
     } else {
       var set = this.state.skillSelect.map((skill) => {
         return (
-          <div key={skill._id} className="skill" id={skill.text} onMouseEnter={this._onMouseEnter} onClick={this._onClick}>
+          <div key={skill._id} className="skill" id={skill.text} onMouseOver={this._onMouseOver} onClick={this._onClick}>
             {skill.text}
           </div>
         )
@@ -55,7 +55,7 @@ SkillsForm = React.createClass({
     this.setState({text: event.target.id})
   },
 
-  _onMouseEnter() {
+  _onMouseOver() {
     this.setState({text: event.target.id})
   },
 
@@ -69,7 +69,12 @@ SkillsForm = React.createClass({
   handleSubmit(event) {
     event.preventDefault()
     var DOMNode = React.findDOMNode(this.refs.text).value.trim()
-    React.findDOMNode(this.refs.text).value = ""
+    console.log(DOMNode);
+    Meteor.call("addSkillToUser", DOMNode)
+    // Meteor.call("createSkill", DOMNode, function (error, result) {
+    //   console.log();
+    // })
+    // React.findDOMNode(this.refs.text).value = ""
   },
 
   render() {

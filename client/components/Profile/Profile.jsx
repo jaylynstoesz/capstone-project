@@ -80,6 +80,7 @@ Profile = React.createClass({
         <BasicInfo profile={profile}/>
         <JobInfo profile={profile}/>
         <SkillsForm />
+        <SkillsInfo profile={profile} />
       </div>
     )
   },

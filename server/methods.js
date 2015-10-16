@@ -45,16 +45,19 @@ if (Meteor.isServer) {
     ////// Skills Methods //////
 
     createSkill: function (text) {
-      Skills.insert(text.toLowerCase())
+      Skills.insert({text: text})
     },
 
-    addSkillToUser: function (skillId) {
-      var skillList = Meteor.user().skills || []
-      if (skillList.indexOf(skillId) < 0) {
-        skillList.push(skillId)
+    addSkillToUser: function (text) {
+      if (Skills.findOne({text: text})) {
+        Skills.findOne({text: text})
       }
-      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
-      console.log(skillList);
+      // var skillList = Meteor.user().skills || []
+      // if (skillList.indexOf(skillId) < 0) {
+      //   skillList.push(skillId)
+      // }
+      // Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
+      // console.log(skillList);
     },
 
     removeSkillFromUser: function (skillId) {
