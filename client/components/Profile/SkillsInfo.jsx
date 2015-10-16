@@ -19,7 +19,7 @@ SkillsInfo = React.createClass({
     return allSkills.map((skill) => {
       return (
         <div key={skill._id} className="col-5 skill">{skill.text}
-          <span id={skill._id} className="col-1 fa fa-remove" onClick={this._onClick}></span>
+          {this.props.editable ? <span id={skill._id} className="col-1 fa fa-remove" onClick={this._onClick}></span> : null }
         </div>
       )
     })

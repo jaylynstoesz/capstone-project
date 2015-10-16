@@ -74,14 +74,14 @@ Profile = React.createClass({
         {this.props.editable ?
           <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>
             {this.state.editing ? "Cancel" : "Edit Info"}
-          </div> : <div className="button" id="add-contact-button" onClick={this.toggleContact}>
+          </div> : <div className="button" id="add-contact-button" hidden={this.props.currentUser == undefined} onClick={this.toggleContact}>
             {this.state.saved ? "Remove contact" : "Save contact"}
           </div>}
         <BasicInfo profile={profile}/>
         <div className="col-5">
           <JobInfo profile={profile}/>
           <h4>Skills</h4>
-          {this.props.editable? <SkillsForm /> : null }
+          {this.props.editable? <SkillsForm editable="true"/> : null }
           <SkillsInfo profile={profile} />
         </div>
       </div>
