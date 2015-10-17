@@ -59,7 +59,6 @@ BasicInfoForm = React.createClass({
   },
 
   toggleChecked() {
-    console.log(event.target.checked);
     var allowText = this.state.allowText
     this.setState({allowText: event.target.checked})
     this.forceUpdate()
@@ -87,7 +86,6 @@ BasicInfoForm = React.createClass({
   },
 
   render() {
-    console.log("!!!!", this.state.allowText);
     return (
       <div id="basic-info" className="container">
         <form className="col-8" onSubmit={this.handleSubmit}>

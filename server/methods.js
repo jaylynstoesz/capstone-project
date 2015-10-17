@@ -25,7 +25,6 @@ if (Meteor.isServer) {
       for (var i = 0; i < props.length; i++) {
         setModifier["profile." + props[i]] = userObject[props[i]]
       }
-      console.log("***************", setModifier, "****************");
       Meteor.users.update(Meteor.user()._id, { $set: setModifier })
     },
 
@@ -35,7 +34,6 @@ if (Meteor.isServer) {
         contactList.push(userId)
       }
       Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactList} })
-      console.log(currentContacts);
     },
 
     removeContact: function (userId) {
@@ -46,8 +44,8 @@ if (Meteor.isServer) {
       Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
     },
 
-    sendEmail: function (to, subject, text) {
-      check([to, subject, text], [String]);
+    sendEmail: function (to, from, subject, text) {
+      check([to, from, subject, text], [String]);
 
       this.unblock();
 
@@ -60,23 +58,21 @@ if (Meteor.isServer) {
       });
     },
 
-    sendText: function () {
-      console.log("********* Send text method ********", process.env.TWILIO_ACCOUNT_SID);
-      twilio = Twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
-      twilio.sendSms({
-        to:'+17206359387', // Any number Twilio can deliver to
-        from: '+17206135663', // A number you bought from Twilio and can use for outbound communication
-        body: 'word to your mother.' // body of the SMS message
-      }, function(err, responseData) { //this function is executed when a response is received from Twilio
+    sendText: function (to, body) {
+      twilio = Twilio(Meteor.settings.TWILIO_ACCOUNT_SID, Meteor.settings.TWILIO_AUTH_TOKEN);
+      return twilio.sendSms({
+        to: to,
+        from: '+17206135663',
+        body: body
+      }, function(err, responseData) {
         if (err) {
           console.log("**** TWILIO ERROR ****", err);
+          return err
         }
-        if (!err) { // "err" is an error received during the request, if any
-          // "responseData" is a JavaScript object containing data received from Twilio.
-          // A sample response from sending an SMS message is here (click "JSON" to see how the data appears in JavaScript):
-          // http://www.twilio.com/docs/api/rest/sending-sms#example-1
-          console.log(responseData.from); // outputs "+14506667788"
-          console.log(responseData.body); // outputs "word to your mother."
+        if (!err) {
+          console.log(responseData.from);
+          console.log(responseData.body);
+          return responseData
         }
       });
     },
@@ -161,6 +157,7 @@ if (Meteor.isServer) {
 
     testMe: function () {
       console.log("******************** TEST ********************");
+      console.log(Meteor.settings);
     }
 
   })
