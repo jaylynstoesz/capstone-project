@@ -1,17 +1,17 @@
-SkillsForm = React.createClass({
+InterestsForm = React.createClass({
 
   mixins: [ReactMeteorData],
 
   getMeteorData() {
     return {
-      allSkills: Skills.find({}).fetch()
+      allInterests: Interests.find({}).fetch()
     }
   },
 
   getInitialState() {
     return {
       text: "",
-      skillSelect: [],
+      interestSelect: [],
     }
   },
 
@@ -22,22 +22,22 @@ SkillsForm = React.createClass({
   handleSubmit(event) {
     event.preventDefault()
     var DOMNode = React.findDOMNode(this.refs.text).value.trim()
-    Meteor.promise("createSkill", DOMNode).then(function (result) {
-      var skillId
+    Meteor.promise("createInterest", DOMNode).then(function (result) {
+      var interestId
       if (typeof result === "string") {
-        skillId = result
+        interestId = result
       } else {
-        skillId = result._id
+        interestId = result._id
       }
-      Meteor.call("addSkillToUser", skillId)
+      Meteor.call("addInterestToUser", interestId)
     })
     this.setState({text: ""})
-    this.setState({skillSelect: []})
+    this.setState({interestSelect: []})
   },
 
   _onBlur() {
     if (React.findDOMNode(this.refs.text).value.trim() === "") {
-      this.setState({skillSelect: []})
+      this.setState({interestSelect: []})
     }
   },
 
@@ -45,40 +45,40 @@ SkillsForm = React.createClass({
     this.handleSubmit(event)
   },
 
-  _onMouseOver() {
-    this.setState({text: event.target.id})
-  },
-
   _onChange() {
     this.validateForm()
     validateField(event.target)
     this.setState({text: event.target.value}, )
-    this.setState({skillSelect: fuzzyMatch(this.data.allSkills, event.target.value, 1)})
+    this.setState({interestSelect: fuzzyMatch(this.data.allInterests, event.target.value, 1)})
+  },
+
+  _onMouseOver() {
+    this.setState({text: event.target.id})
   },
 
   validateForm() {
     this.setState({canSubmit: true})
-    $("#submit-skill-button").removeClass("disabled")
+    $("#submit-interest-button").removeClass("disabled")
     var DOMNode = React.findDOMNode(this.refs.text)
     if (DOMNode.value === "" && DOMNode.required) {
-      $("#submit-skill-button").addClass("disabled")
+      $("#submit-interest-button").addClass("disabled")
       this.setState({canSubmit: false})
     }
   },
 
-  renderSkillSelect() {
-    if (this.state.skillSelect === []) {
+  renderInterestSelect() {
+    if (this.state.interestSelect === []) {
       return null
     } else {
-      var set = this.state.skillSelect.map((skill) => {
+      var set = this.state.interestSelect.map((interest) => {
         return (
           <div
-            className="skill"
-            id={skill.text}
-            key={skill._id}
+            className="panel-small interest"
+            id={interest.text}
+            key={interest._id}
             onClick={this._onClick}
             onMouseOver={this._onMouseOver}>
-              {skill.text}
+              {interest.text}
           </div>
         )
       })
@@ -92,9 +92,9 @@ SkillsForm = React.createClass({
         <input
           className="col-6"
           name="text"
-          onChange={this._onChange}
           onBlur={this._onBlur}
-          placeholder="Add a new skill, tool, or technology"
+          onChange={this._onChange}
+          placeholder="Add something you're looking for"
           ref="text"
           required
           type="text"
@@ -102,10 +102,10 @@ SkillsForm = React.createClass({
         <button
           disabled={!this.state.canSubmit}
           hidden
-          id="sumbit-skill-button"
+          id="sumbit-interest-button"
           type="submit"></button>
-        <div>
-          {this.renderSkillSelect()}
+        <div className="col-5">
+          {this.renderInterestSelect()}
         </div>
       </form>
     )

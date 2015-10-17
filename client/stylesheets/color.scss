@@ -1,3 +1,11 @@
+@mixin transition() {
+  -webkit-transition: background-color 0.3s;
+  -moz-transition: background-color 0.3s;
+  -o-transition: background-color 0.3s;
+  -ms-transition: background-color 0.3s;
+  transition: background-color 0.3s;
+}
+
 $primary: #F7901E;
 // orange
 $primary-dark: #F38409;
@@ -16,23 +24,27 @@ body {
   background-image: url("/images/DenverSkyline.png")
 }
 
-.fa {
+input, textarea {
+  border: 1px solid $gray;
+}
+
+input:focus, select:focus, button:focus {
+    outline: none !important;
+    border: 1px solid $primary;
+    box-shadow: 0 0 4px $primary;
+}
+
+select, option {
+  background-color: $primary;
+  color: $white;
+}
+
+h1, h2, h3, h4, h5 {
   color: $primary;
-  cursor: pointer;
-}
-.fa:hover {
-  color: $primary-dark;
 }
 
-.fa-plus, .fa-plus:hover, .fa-check, .fa-check:hover {
-  color: $white !important;
-}
-
-.todo, .contact {
-  background-color: $blackish;
-  a {
-    color: $white;
-  }
+.browse, .profile  {
+  background-color: $white;
 }
 
 .button {
@@ -45,8 +57,9 @@ body {
   background-color: $primary-dark;
 }
 
-.invalid {
-  border: 2px solid $primary-dark;
+.dashboard-left, .dashboard-right {
+  background-color: transparentize($black, 0.3);
+  color: $white;
 }
 
 .disabled {
@@ -55,6 +68,30 @@ body {
 
 .disabled:hover {
   background-color: $blackish;
+}
+
+.fa {
+  color: $primary;
+  cursor: pointer;
+}
+.fa:hover {
+  color: $primary-dark;
+}
+
+.fa-plus, .fa-plus:hover, .fa-check, .fa-check:hover {
+  color: $white !important;
+}
+
+.interest {
+  background-color: $primary;
+}
+
+.interest:hover {
+  background-color: $primary-dark;
+}
+
+.invalid {
+  border: 2px solid $primary-dark;
 }
 
 .navbar-component {
@@ -78,40 +115,16 @@ body {
   }
 }
 
-.dashboard, .dashboard-right {
-  background-color: transparentize($black, 0.3);
-  color: $white;
-}
-
-
-.profile-component, .browse-component {
-  background-color: $white;
-}
-
-.skill {
+.panel-small {
+  @include transition;
   background-color: $blackish;
   color: $white;
+  a {
+    color: $white;
+  }
 }
 
-.skill:hover {
+.panel-small:hover {
+  @include transition;
   background-color: $black;
-}
-
-input, textarea {
-  border: 1px solid $gray;
-}
-
-input:focus, select:focus, button:focus {
-    outline: none !important;
-    border: 1px solid $primary;
-    box-shadow: 0 0 4px $primary;
-}
-
-select, option {
-  background-color: $primary;
-  color: $white;
-}
-
-h1, h2, h3, h4, h5 {
-  color: $primary;
 }

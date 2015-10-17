@@ -18,8 +18,16 @@ SkillsInfo = React.createClass({
     var allSkills = this.data.allSkills
     return allSkills.map((skill) => {
       return (
-        <div key={skill._id} className="col-5 skill">{skill.text}
-          {this.props.editable ? <span id={skill._id} className="col-1 fa fa-remove" onClick={this._onClick}></span> : null }
+        <div
+          key={skill._id}
+          className="col-5 panel-small">
+            {skill.text}
+            {this.props.editable ? <span
+                                      id={skill._id}
+                                      className="col-1 fa fa-remove"
+                                      onClick={this._onClick}>
+                                    </span>
+                                  : null }
         </div>
       )
     })
@@ -28,7 +36,7 @@ SkillsInfo = React.createClass({
 
   render() {
     return (
-      <div className="col-8">
+      <div>
         {this.renderSkills()}
       </div>
     )

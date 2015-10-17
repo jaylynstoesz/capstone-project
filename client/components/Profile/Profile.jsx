@@ -59,10 +59,8 @@ Profile = React.createClass({
   renderProfile() {
     var profile = this.data.profile
     return (
-      <div>
-        <div className="container col-6 profile-component">
-          {this.state.editing ? <BasicInfoForm profile={profile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
-        </div>
+      <div className="container col-6 profile">
+        {this.state.editing ? <BasicInfoForm profile={profile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
       </div>
     )
   },
@@ -70,25 +68,40 @@ Profile = React.createClass({
   renderBasicInfo() {
     var profile = this.data.profile
     return (
-      <div>
-        {this.props.editable ?
-          <div className="button" id="edit-profile-button" onClick={this.toggleBasicForm}>
-            {this.state.editing ? "Cancel" : "Edit Info"}
-          </div> : <div className="button" id="add-contact-button" hidden={this.props.currentUser == undefined} onClick={this.toggleContact}>
-            {this.state.saved ? "Remove contact" : "Save contact"}
-          </div>}
-        <BasicInfo profile={profile}/>
+      <div className="col-10">
+        <div className="col-10">
+          {this.props.editable ? <div
+                                    className="button"
+                                    id="edit-profile-button"
+                                    onClick={this.toggleBasicForm}>
+                                      {this.state.editing ? "Cancel" : "Edit Info"}
+                                  </div>
+                                : <div
+                                    className="button"
+                                    hidden={this.props.currentUser == undefined} 
+                                    id="add-contact-button"
+                                    onClick={this.toggleContact}>
+                                      {this.state.saved ? "Remove contact" : "Save contact"}
+                                  </div>
+          }
+          <BasicInfo profile={profile}/>
+        </div>
         <div className="col-5">
-          <JobInfo profile={profile}/>
-          <h4>Skills</h4>
-          {this.props.editable? <SkillsForm editable="true"/> : null }
-          <SkillsInfo profile={profile} />
+          <div className="col-10 panel">
+            <JobInfo profile={profile} editable={this.props.editable}/>
+          </div>
+          <div className="col-10 panel">
+            <h4>Skills</h4>
+            {this.props.editable ? <SkillsForm/> : null }
+            <SkillsInfo profile={profile} editable={this.props.editable}/>
+          </div>
         </div>
       </div>
     )
   },
 
   render() {
+    console.log(this.state.profile);
     return (
       <div>
         {this.state.profile ? this.renderProfile() : <h1>Oops! User not found.</h1>}

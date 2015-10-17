@@ -5,24 +5,26 @@ Todo = React.createClass({
     }
   },
 
-  toggleForm() {
-    this.setState({editing : !this.state.editing})
-  },
-
   destroyTodo() {
     Meteor.call("destroyTodo", this.props.todo._id)
   },
 
+  toggleForm() {
+    this.setState({editing : !this.state.editing})
+  },
+
   renderTodo() {
     return (
-      <div className="todo col-8">
+      <div className="col-8 panel-small">
         <div className="col-10">
-          <span onClick={this.destroyTodo} className="fa fa-remove"> </span>
-          <span onClick={this.toggleForm} className="fa fa-pencil"> </span>
+          <span className="fa fa-remove" onClick={this.destroyTodo}></span>
+          <span className="fa fa-pencil" onClick={this.toggleForm}></span>
         </div>
         <div className="col-10">
           <p>{this.props.todo.text}</p>
-          <p><b>{this.props.todo.deadline ? "Due: " + this.props.todo.deadline : null}</b></p>
+          <p>
+            <b>{this.props.todo.deadline ? "Due: " + this.props.todo.deadline : null}</b>
+          </p>
         </div>
       </div>
     )
@@ -32,7 +34,11 @@ Todo = React.createClass({
     var todo = this.props.todo
     return (
         <div>
-          {this.state.editing ? <TodoForm type="update" todo={this.props.todo} toggleForm={this.toggleForm}/> : this.renderTodo() }
+          {this.state.editing ? <TodoForm
+                                  todo={this.props.todo}
+                                  toggleForm={this.toggleForm}
+                                  type="update" />
+                              : this.renderTodo() }
         </div>
     )
   }

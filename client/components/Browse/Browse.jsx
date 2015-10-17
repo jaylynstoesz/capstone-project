@@ -22,16 +22,8 @@ Browse = React.createClass({
     }
   },
 
-  renderCampuses() {
-    var allCampuses = this.state.campuses
-    return allCampuses.map((campus) => {
-      return (
-        <tr key={campus.id}>
-          <td><input type="checkbox" id={campus.id} name={campus.name} checked={campus.checked} onChange={this.toggleCampus}/></td>
-          <td><label htmlFor={campus.id}>{campus.name}</label></td>
-        </tr>
-      )
-    })
+  _onChange() {
+    this.setState({sortBy: React.findDOMNode(this.refs.sortBy).value})
   },
 
   toggleCampus() {
@@ -42,6 +34,29 @@ Browse = React.createClass({
         this.forceUpdate()
       }
     }
+  },
+
+  renderCampuses() {
+    var allCampuses = this.state.campuses
+    return allCampuses.map((campus) => {
+      return (
+        <tr key={campus.id}>
+          <td><input
+            checked={campus.checked}
+            id={campus.id}
+            name={campus.name}
+            onChange={this.toggleCampus}
+            type="checkbox"/>
+          </td>
+          <td>
+            <label
+              htmlFor={campus.id}>
+              {campus.name}
+            </label>
+          </td>
+        </tr>
+      )
+    })
   },
 
   renderUsers() {
@@ -59,7 +74,9 @@ Browse = React.createClass({
       }
       if (user.viewing) {
         return (
-          <a key={user._id} user={user} href={"/users/" + user._id}>
+          <a href={"/users/" + user._id}
+            key={user._id}
+            user={user}>
             <div className="container col-10">
               <h2>{user.profile.firstName} {user.profile.lastName}</h2>
               <p>{user.profile.cohortType}{user.profile.cohortNumber} at {user.profile.cohortLocation}</p>
@@ -72,14 +89,10 @@ Browse = React.createClass({
     })
   },
 
-  _onChange() {
-    this.setState({sortBy: React.findDOMNode(this.refs.sortBy).value})
-  },
-
   render() {
     return (
       <div>
-        <div className="container col-6 browse-component">
+        <div className="container col-6 browse">
           <div className="container col-4 browse-inner">
             <div className="container col-10">
               <h5>Sort By: </h5>
@@ -100,7 +113,7 @@ Browse = React.createClass({
               </table>
             </div>
           </div>
-          <div className="container col-5 browse-inner" id="user-list">
+          <div className="container col-6 browse-inner" id="user-list">
             {this.renderUsers()}
           </div>
         </div>

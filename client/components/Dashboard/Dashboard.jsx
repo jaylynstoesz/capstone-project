@@ -8,6 +8,10 @@ Dashboard = React.createClass({
     }
   },
 
+  toggleDash() {
+    $(".dashboard-left").toggleClass("dashboard-left-open")
+  },
+
   renderTodos() {
     var allTodos = this.data.allTodos
     return allTodos.map((todo) => {
@@ -17,32 +21,18 @@ Dashboard = React.createClass({
     })
   },
 
-  renderTodoForm() {
-    return (
-      <div className="col-9" id="todos">
-        <TodoForm type="create"/>
-      </div>
-    )
-  },
-
-  toggleDash() {
-    $("#dashboard").toggleClass("dashboard-open")
-  },
-
   render() {
     return (
-      <div>
-        <div className="col-2 dashboard-component">
-          <div className="col-2 container dashboard" id="dashboard">
-            <div onClick={this.toggleDash}>
-              <h1 className="fa fa-bars"></h1>
-            </div>
-            <h3>To-Do List</h3>
-            <div id="todos-list">
-              {this.renderTodoForm()}
-              {this.renderTodos()}
-            </div>
+      <div className="container col-2 dashboard-left">
+        <div onClick={this.toggleDash}>
+          <h1 className="fa fa-bars"></h1>
+        </div>
+        <h3>To-Do List</h3>
+        <div className="todo-list">
+          <div className="col-9">
+            <TodoForm type="create"/>
           </div>
+          {this.renderTodos()}
         </div>
       </div>
     )

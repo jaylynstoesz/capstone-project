@@ -1,4 +1,4 @@
-input, textarea, .skill, #submit-todo-button, #submit-info-button {
+input, textarea, .skill, .interest, #submit-todo-button, #submit-info-button {
   padding: 10px;
   border-radius: 2px;
   margin-left: 5px;
@@ -41,8 +41,4 @@ select {
   margin-right: 0;
   height: 35px;
   vertical-align: middle;
-}
-
-.skill:hover {
-  cursor: pointer;
 }

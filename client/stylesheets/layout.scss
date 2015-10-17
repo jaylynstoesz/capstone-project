@@ -6,6 +6,11 @@ body {
   margin: 0;
 }
 
+.browse-inner, .contact-list, .todo-list {
+  overflow: scroll !important;
+  height: 47em;
+}
+
 .fa-pencil {
   float: left;
 }
@@ -18,38 +23,55 @@ body {
   padding: 5px;
 }
 
-.profile-component, .browse-component, .dashboard, .dashboard-right, .dashboard-component, .spacer {
+.panel {
+  margin-top: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px gray;
+}
+
+.panel-small {
+  margin: 5px;
+  padding: 5px;
+  border-radius: 3px;
+  p {
+    margin: 0px;
+    margin-top: 5px;
+  }
+}
+
+.panel-small:hover {
+  cursor: pointer;
+}
+
+.profile, .browse, .dashboard-left, .dashboard-right {
   height: 52em;
   h3 {
     margin-top: 0px;
   }
 }
 
-.info-open {
-  background-color: blue;
-}
-
-.info-closed {
-  background-color: red;
-}
-
-.profile-component {
+.profile, .browse {
+  margin-left: 20%;
   overflow: scroll;
 }
 
-.dashboard {
+.dashboard-left {
   position: absolute;
+  top: 5em;
   left: -16.5%;
   -webkit-transition: 0.2s;
 }
 
 .dashboard-right {
   position: absolute;
+  top: 5em;
   left: 96.5%;
   -webkit-transition: 0.2s;
 }
 
-.dashboard-open {
+.dashboard-left-open {
   -webkit-transform: translate(82.5%);
   -webkit-transition: 0.2s;
 }
@@ -59,15 +81,6 @@ body {
   -webkit-transition: 0.2s;
 }
 
-.todo, .contact {
-  margin: 5px;
-  padding: 5px;
-  border-radius: 3px;
-  p {
-    margin: 0px;
-    margin-top: 5px;
-  }
-}
 
 .navbar-component {
   height: 5em;
@@ -106,9 +119,4 @@ body {
   form {
     margin-left: 15%;
   }
-}
-
-#todos-list, #contact-list, .browse-inner {
-  overflow: scroll !important;
-  height: 47em;
 }

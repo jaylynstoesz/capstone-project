@@ -11,6 +11,10 @@ if (Meteor.isServer) {
     return Skills.find({})
   });
 
+  Meteor.publish("interests", function () {
+    return Interests.find({})
+  });
+
   Meteor.methods({
 
     ////// User Methods //////
@@ -66,6 +70,32 @@ if (Meteor.isServer) {
         return skill !== skillId
       })
       Meteor.users.update(Meteor.user()._id, { $set: {skills: skillRemoved} })
+    },
+
+    ////// Interests Methods //////
+
+    createInterest: function (text) {
+      if (Interests.findOne({text: text}) === undefined) {
+        return Interests.insert({text: text})
+      } else {
+        return (Interests.findOne({text: text}));
+      }
+    },
+
+    addInterestToUser: function (interestId) {
+      var interestList = Meteor.user().interests || []
+      if (interestList.indexOf(interestId) < 0) {
+        interestList.push(interestId)
+      }
+      Meteor.users.update(Meteor.user()._id, { $set: {interests: interestList} })
+    },
+
+    removeInterestFromUser: function (interestId) {
+      var interestList = Meteor.user().interests || []
+      var interestRemoved = interestList.filter(function (interest) {
+        return interest !== interestId
+      })
+      Meteor.users.update(Meteor.user()._id, { $set: {interests: interestRemoved} })
     },
 
     ////// Todo Methods //////

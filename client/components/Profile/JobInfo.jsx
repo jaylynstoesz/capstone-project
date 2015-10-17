@@ -3,15 +3,11 @@ JobInfo = React.createClass({
   renderInfo() {
     var profile = this.props.profile.profile
     return (
-      <div id="job-info">
-        <div>
-          <h4>About</h4>
-          <p>{profile.bio}</p>
-        </div>
-        <div>
-          <h4>Interests</h4>
-          <p>{profile.jobType} in {profile.desiredCity}, {profile.desiredState}</p>
-        </div>
+      <div id="job-info" className="col-10">
+        <h4>Career Interests</h4>
+        <p>{profile.jobType} in {profile.desiredCity}, {profile.desiredState}</p>
+        {this.props.editable ? <InterestsForm/> : null }
+        <InterestsInfo profile={this.props.profile} editable={this.props.editable}/>
       </div>
     )
   },
