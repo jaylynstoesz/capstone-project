@@ -11,9 +11,9 @@ App = React.createClass({
 
   campuses: [
     {id: "boulder", name: "Boulder", src: "/images/boulder.jpg"},
-    {id: "denverPlatte", name: "Denver - Platte", src: "/images/platte.jpg"},
+    {id: "denverPlatte", name: "Denver - Platte", src: "/images/coorsfield.jpg"},
     {id: "denverGolden", name: "Denver - Golden Triangle", src: "/images/DenverSkyline.png"},
-    {id: "fortCollins", name: "Fort Collins", src: "/images/DenverSkyline.png"},
+    {id: "fortCollins", name: "Fort Collins", src: "/images/denver2.jpg"},
     {id: "sanFrancisco", name: "San Francisco", src: "/images/sanfrancisco.jpg"},
     {id: "seattle", name: "Seattle", src: "/images/seattle2.jpg"}
   ],

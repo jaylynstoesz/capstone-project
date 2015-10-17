@@ -31,11 +31,17 @@ Messenger = React.createClass({
   },
 
   handleSubmit() {
+    event.preventDefault()
     var type = this.state.type
-    var subject = React.findDOMNode(this.refs.subject).value.trim()
+    if (type === "email") {
+      var subject = React.findDOMNode(this.refs.subject).value.trim()
+    }
     var body = React.findDOMNode(this.refs.body).value.trim()
-    if (this.state.type === email) {
-      Meteor.call("sendEmail", this.state.profile.emails[0].address, subject, body)
+    if (this.state.type === "email") {
+      Meteor.call("sendEmail", "jaylynstoesz@gmail.com","jaylynstoesz@gmail.com", subject, body)
+    } else if (this.state.type === "text") {
+      console.log("sending text");
+      Meteor.call("sendText")
     }
   },
 
@@ -53,7 +59,7 @@ Messenger = React.createClass({
     var recipient = this.state.profile;
     return (
       <div className="container col-6 messenger">
-        <h1>Send {recipient.profile.firstName} a message</h1>
+        // <h1>Send {recipient.profile.firstName} a message</h1>
         <form onSubmit={this.handleSubmit}>
           <div className="col-8">
             <h5>Message type</h5>
