@@ -23,7 +23,7 @@ App = React.createClass({
           backgroundImage: "url(/images/DenverSkyline.png)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "100% 100%",
-          height: "57.5em",
+          height: "57.25em",
         };
     if (this.data.currentUser) {
       for (var i = 0; i < this.campuses.length; i++) {

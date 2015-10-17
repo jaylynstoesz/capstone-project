@@ -6,9 +6,15 @@ body {
   margin: 0;
 }
 
-.browse-inner, .contact-list, .todo-list {
+.browse-inner, .todo-list {
   overflow: scroll !important;
   height: 47em;
+}
+
+.contact-list, .recommended-list {
+  overflow: scroll !important;
+  height: 20em;
+  float: right;
 }
 
 .fa-pencil {
@@ -45,7 +51,7 @@ body {
 }
 
 .profile, .browse, .dashboard-left, .dashboard-right {
-  height: 52em;
+  height: 52.25em;
   h3 {
     margin-top: 0px;
   }

@@ -20,7 +20,8 @@ SkillsInfo = React.createClass({
       return (
         <div
           key={skill._id}
-          className="col-5 panel-small">
+          className="col-5 panel-small"
+          draggable>
             {skill.text}
             {this.props.editable ? <span
                                       id={skill._id}
