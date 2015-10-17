@@ -22,9 +22,12 @@ Profile = React.createClass({
     Meteor.call("createTodo", todoObject)
   },
 
-  componentDidMount() {
+  componentWillMount() {
     this.setState({profile: this.data.profile})
     this.setState({currentUser: this.data.currentUser})
+  },
+
+  componentDidMount() {
     if (!this.data.profile.profile && this.props.editable) {
       this.setState({editing: true})
     }

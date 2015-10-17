@@ -19,18 +19,17 @@ ContactDash = React.createClass({
     return allContacts.map((contact) => {
       return (
         <div key={contact._id} contact={contact} className="col-10 panel-small">
+          <a href={"/users/" + contact._id + "/message"}><span className="fa fa-envelope"></span></a>
           <a href={"/users/" + contact._id}>
-            <span className="fa fa-envelope"> </span>
             <p><b>{contact.profile.firstName} {contact.profile.lastName} - {contact.profile.cohortType}{contact.profile.cohortNumber}</b></p>
-            <p>{contact.profile.currentCity}, {contact.profile.currentState} - {contact.profile.company}</p>
           </a>
+          <p>{contact.profile.currentCity}, {contact.profile.currentState} - {contact.profile.company}</p>
         </div>
       )
     })
   },
 
   renderRecommendations() {
-    // console.log(this.data.allUsers);
     var scores = this.data.allUsers.map((user) => {
       return recommend(this.props.currentUser, user)
     })
@@ -39,7 +38,6 @@ ContactDash = React.createClass({
       if (a.score < b.score) { return -1 }
       return 0;
     }.bind(this))
-    console.log(sorted);
     return sorted.map((user) => {
       return (
         <div key={user.user._id} className="col-10 panel-small">

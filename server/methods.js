@@ -46,6 +46,20 @@ if (Meteor.isServer) {
       Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
     },
 
+    sendEmail: function (to, subject, text) {
+      check([to, subject, text], [String]);
+
+      this.unblock();
+
+      Email.send({
+        to: to,
+        from: Meteor.user().emails[0].address,
+        subject: subject,
+        text: text
+      });
+    },
+
+
     ////// Skills Methods //////
 
     createSkill: function (text) {

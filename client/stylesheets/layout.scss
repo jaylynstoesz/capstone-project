@@ -50,14 +50,14 @@ body {
   cursor: pointer;
 }
 
-.profile, .browse, .dashboard-left, .dashboard-right {
+.profile, .browse, .messenger, .dashboard-left, .dashboard-right {
   height: 52.25em;
   h3 {
     margin-top: 0px;
   }
 }
 
-.profile, .browse {
+.profile, .browse, .messenger {
   margin-left: 20%;
   overflow: scroll;
 }

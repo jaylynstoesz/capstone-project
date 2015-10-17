@@ -19,3 +19,11 @@ FlowRouter.route('/users/:id', {
     }, document.getElementById('render-app'))
   }
 })
+
+FlowRouter.route('/users/:id/message', {
+  action: function(params) {
+    ReactLayout.render(App, {
+      content: <Messenger page={params.id} currentUser={Meteor.userId()}/>
+    }, document.getElementById('render-app'))
+  }
+})

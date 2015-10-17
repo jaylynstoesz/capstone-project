@@ -8,6 +8,7 @@ App = React.createClass({
     }
   },
 
+
   campuses: [
     {id: "boulder", name: "Boulder", src: "/images/boulder.jpg"},
     {id: "denverPlatte", name: "Denver - Platte", src: "/images/platte.jpg"},
