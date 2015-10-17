@@ -16,6 +16,12 @@ Profile = React.createClass({
     }
   },
 
+  clickToAdd() {
+    var todoObject = {}
+    todoObject.text = "Research " + event.target.innerHTML
+    Meteor.call("createTodo", todoObject)
+  },
+
   componentDidMount() {
     this.setState({profile: this.data.profile})
     this.setState({currentUser: this.data.currentUser})
@@ -78,7 +84,7 @@ Profile = React.createClass({
                                   </div>
                                 : <div
                                     className="button"
-                                    hidden={this.props.currentUser == undefined} 
+                                    hidden={this.props.currentUser == undefined}
                                     id="add-contact-button"
                                     onClick={this.toggleContact}>
                                       {this.state.saved ? "Remove contact" : "Save contact"}
@@ -88,12 +94,12 @@ Profile = React.createClass({
         </div>
         <div className="col-5">
           <div className="col-10 panel">
-            <JobInfo profile={profile} editable={this.props.editable}/>
+            <JobInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
           </div>
           <div className="col-10 panel">
             <h4>Skills</h4>
             {this.props.editable ? <SkillsForm/> : null }
-            <SkillsInfo profile={profile} editable={this.props.editable}/>
+            <SkillsInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
           </div>
         </div>
       </div>

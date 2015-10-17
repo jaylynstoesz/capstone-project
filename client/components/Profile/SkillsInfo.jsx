@@ -21,7 +21,8 @@ SkillsInfo = React.createClass({
         <div
           key={skill._id}
           className="col-5 panel-small"
-          draggable>
+          draggable
+          onDoubleClick={this.props.clickToAdd}>
             {skill.text}
             {this.props.editable ? <span
                                       id={skill._id}

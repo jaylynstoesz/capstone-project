@@ -20,7 +20,7 @@ InterestsInfo = React.createClass({
       return (
         <div
           key={interest._id}
-          className="col-5 panel-small">
+          className="col-5 panel-small" onDoubleClick={this.props.clickToAdd}>
           {interest.text}
           {this.props.editable ? <span
                                     id={interest._id}
