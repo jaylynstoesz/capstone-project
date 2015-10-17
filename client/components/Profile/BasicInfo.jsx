@@ -8,8 +8,25 @@ BasicInfo = React.createClass({
           <h1>{profile.firstName} {profile.lastName}</h1>
           <p>{profile.cohortType}{profile.cohortNumber} at {profile.cohortLocation}</p>
           <p>{profile.jobTitle} at {profile.company} in {profile.currentCity}, {profile.currentState}</p>
+          <div className="container col-10 social-links">
+            {profile.github ? <a
+                                className="col-half fa fa-github social"
+                                href={profile.github}
+                                target="_blank">
+                              </a> : null}
+            {profile.linkedin ? <a
+                                className="col-half fa fa-linkedin social"
+                                href={profile.linkedin}
+                                target="_blank">
+                              </a> : null}
+            {profile.twitter ? <a
+                                className="col-half fa fa-twitter social"
+                                href={profile.twitter}
+                                target="_blank">
+                              </a> : null}
+          </div>
         </div>
-        <div className="container col-5">
+        <div className="container col-5 panel">
           <h4>About</h4>
           <p>{profile.bio}</p>
         </div>

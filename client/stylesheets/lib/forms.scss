@@ -42,3 +42,20 @@ select {
   height: 35px;
   vertical-align: middle;
 }
+
+#basic-info {
+  label {
+    padding-top: 2%;
+    padding-left: 1%;
+  }
+  label.fa-mobile {
+    padding-left: 1.5%;
+    font-size: 1.9em;
+  }
+  label.small {
+    font-size: 1.0em;
+  }
+  input.col-half {
+    margin-left: 20px;
+  }
+}

@@ -5,25 +5,33 @@ BasicInfoForm = React.createClass({
     var formFields = {}
     for (var i = 0; i < allFields.length; i++) {
       formFields[allFields[i]] = profile[allFields[i]] || ""
+      if (allFields[i] === "allowText") {
+        formFields[allFields[i]] = profile[allFields[i]] || false
+      }
     }
     return formFields
   },
 
   allFields() {
     return [
-      "firstName",
-      "lastName",
+      "allowText",
+      "bio",
+      "company",
       "cohortType",
       "cohortNumber",
       "cohortLocation",
       "currentCity",
       "currentState",
-      "jobTitle",
-      "company",
       "desiredCity",
       "desiredState",
-      "bio",
-      "jobType"
+      "firstName",
+      "github",
+      "jobTitle",
+      "jobType",
+      "lastName",
+      "linkedin",
+      "phone",
+      "twitter"
     ]
   },
 
@@ -36,13 +44,25 @@ BasicInfoForm = React.createClass({
     var userObject = {}
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
-      var DOMNode = React.findDOMNode(this.refs[allFields[i]]).value.trim()
+      var DOMNode = React.findDOMNode(this.refs[allFields[i]])
+      if (DOMNode.type !== "checkbox" && DOMNode.type !== "radio") {
+        DOMNode = DOMNode.value.trim()
+      } else {
+        DOMNode = DOMNode.checked
+      }
       if (allFields[i] === "currentState" || allFields[i] === "desiredState") {
         DOMNode = DOMNode.toUpperCase()
       }
       userObject[allFields[i]] = DOMNode
     }
     this.props.submitForm(userObject)
+  },
+
+  toggleChecked() {
+    console.log(event.target.checked);
+    var allowText = this.state.allowText
+    this.setState({allowText: event.target.checked})
+    this.forceUpdate()
   },
 
   _onChange: function() {
@@ -59,7 +79,7 @@ BasicInfoForm = React.createClass({
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]])
-      if (DOMNode.value === "") {
+      if (DOMNode.value === "" && DOMNode.required) {
         $("#submit-info-button").addClass("disabled")
         this.setState({canSubmit: false})
       }
@@ -67,9 +87,66 @@ BasicInfoForm = React.createClass({
   },
 
   render() {
+    console.log("!!!!", this.state.allowText);
     return (
       <div id="basic-info" className="container">
         <form className="col-8" onSubmit={this.handleSubmit}>
+          <div className="col-8">
+            <h5>Contact</h5>
+          </div>
+          <div className="col-10">
+            <label htmlFor="phone" className="col-half fa fa-mobile social"></label>
+            <input
+              className="col-4"
+              name="phone"
+              onChange={this._onChange}
+              placeholder="303-867-5309"
+              ref="phone"
+              type="tel"
+              value={this.state.phone}/>
+            <input
+              checked={this.state.allowText}
+              className="col-half"
+              name="allowText"
+              onChange={this.toggleChecked}
+              ref="allowText"
+              type="checkbox"
+              checked={this.state.allowText} />
+            <label htmlFor="allowText" className="col-4 small">Other gSchoolers can text me</label>
+          </div>
+          <div className="col-10">
+            <label htmlFor="github" className="col-half fa fa-github social"></label>
+            <input
+              className="col-4"
+              name="github"
+              onChange={this._onChange}
+              placeholder="https://github.com/zilkey"
+              ref="github"
+              type="text"
+              value={this.state.github}/>
+          </div>
+          <div className="col-10">
+            <label htmlFor="linkedin" className="col-half fa fa-linkedin social"></label>
+            <input
+              className="col-4"
+              name="linkedin"
+              onChange={this._onChange}
+              placeholder="https://www.linkedin.com/in/jeffdean"
+              ref="linkedin"
+              type="text"
+              value={this.state.linkedin}/>
+          </div>
+          <div className="col-10">
+            <label htmlFor="twitter" className="col-half fa fa-twitter social"></label>
+            <input
+              className="col-4"
+              name="twitter"
+              onChange={this._onChange}
+              placeholder="https://twitter.com/jeffrosoft"
+              ref="twitter"
+              type="text"
+              value={this.state.twitter}/>
+          </div>
           <div className="col-8">
             <h5>Basic Information</h5>
           </div>
@@ -79,6 +156,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="First Name"
             ref="firstName"
+            required
             type="text"
             value={this.state.firstName} />
           <input
@@ -87,6 +165,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="Last Name"
             ref="lastName"
+            required
             type="text"
             value={this.state.lastName}/>
           <div className="col-8">
@@ -95,6 +174,7 @@ BasicInfoForm = React.createClass({
               name="cohortType"
               onChange={this._onChange}
               ref="cohortType"
+              required
               value={this.state.cohortType}>
               <option value="g">Full Stack</option>
               <option value="D">Data Science</option>
@@ -105,6 +185,7 @@ BasicInfoForm = React.createClass({
               name="cohortNumber"
               onChange={this._onChange}
               ref="cohortNumber"
+              required
               value={this.state.cohortNumber}>
               <option value="1">1</option>
               <option value="2">2</option>
@@ -124,6 +205,7 @@ BasicInfoForm = React.createClass({
               name="cohortLocation"
               onChange={this._onChange}
               ref="cohortLocation"
+              required
               value={this.state.cohortLocation}>
               <option value="Boulder">Boulder</option>
               <option value="Denver - Platte">Denver - Platte</option>
@@ -142,6 +224,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="Job Title"
             ref="jobTitle"
+            required
             type="text"
             value={this.state.jobTitle}/>
           <input
@@ -150,6 +233,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="Company"
             ref="company"
+            required
             type="text"
             value={this.state.company}/>
           <div className="col-8">
@@ -161,6 +245,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="Current City"
             ref="currentCity"
+            required
             type="text"
             value={this.state.currentCity}/>
           <input
@@ -170,6 +255,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="State"
             ref="currentState"
+            required
             type="text"
             value={this.state.currentState}/>
           <div className="col-8">
@@ -179,6 +265,7 @@ BasicInfoForm = React.createClass({
               onChange={this._onChange}
               name="jobType"
               ref="jobType"
+              required
               value={this.state.jobType}>
               <option value="Full Stack development">Full Stack</option>
               <option value="Front End development">Front End</option>
@@ -195,6 +282,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="Desired City"
             ref="desiredCity"
+            required
             type="text"
             value={this.state.desiredCity}/>
           <input
@@ -204,6 +292,7 @@ BasicInfoForm = React.createClass({
             onChange={this._onChange}
             placeholder="State"
             ref="desiredState"
+            required
             type="text"
             value={this.state.desiredState}/>
           <div className="col-8">
