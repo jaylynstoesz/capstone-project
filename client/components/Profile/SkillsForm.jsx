@@ -73,7 +73,7 @@ SkillsForm = React.createClass({
       var set = this.state.skillSelect.map((skill) => {
         return (
           <div
-            className="skill"
+            className="panel-small"
             id={skill.text}
             key={skill._id}
             onClick={this._onClick}

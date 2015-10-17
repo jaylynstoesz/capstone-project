@@ -8,9 +8,32 @@ App = React.createClass({
     }
   },
 
+  campuses: [
+    {id: "boulder", name: "Boulder", src: "/images/boulder.jpg"},
+    {id: "denverPlatte", name: "Denver - Platte", src: "/images/platte.jpg"},
+    {id: "denverGolden", name: "Denver - Golden Triangle", src: "/images/DenverSkyline.png"},
+    {id: "fortCollins", name: "Fort Collins", src: "/images/DenverSkyline.png"},
+    {id: "sanFrancisco", name: "San Francisco", src: "/images/sanfrancisco.jpg"},
+    {id: "seattle", name: "Seattle", src: "/images/seattle2.jpg"}
+  ],
+
+
   render() {
+    var divStyle = {
+          backgroundImage: "url(/images/DenverSkyline.png)",
+          backgroundRepeat: "no-repeat",
+          backgroundSize: "100% 100%",
+          height: "57.5em",
+        };
+    if (this.data.currentUser) {
+      for (var i = 0; i < this.campuses.length; i++) {
+        if (this.data.currentUser.profile.cohortLocation === this.campuses[i].name) {
+          divStyle.backgroundImage = "url(" + this.campuses[i].src + ")"
+        }
+      }
+    }
     return (
-      <div>
+      <div style={divStyle}>
         <Navbar currentUser={this.data.currentUser ? this.data.currentUser : null}/>
         {this.data.currentUser ? <Dashboard currentUser={this.data.currentUser} /> : <div className="col-2 dashboard-component"></div>}
         {this.data.currentUser ? <ContactDash currentUser={this.data.currentUser} /> : null}
