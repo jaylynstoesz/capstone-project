@@ -12,14 +12,19 @@ http://gschool_alumni_network.meteor.com/
 ## Technologies used
 - React
 - Meteor
+- Github API
 
-## Atmosphere Packages
+## Atmosphere/NPM Packages
 - React
 - Accounts-UI
+- Accounts-Github
 - HTTP
 - Email
 - Kadira:FlowRouter
 - Kadira:ReactLayout
 - OKGrow: Promise
 - FourSeven: SCSS
+- React-gist-embed
 - FontAwesome
+- Accolver:twilio-meteor
+- Meteorhacks:npm

@@ -12,8 +12,4 @@ if (Meteor.isClient) {
     // passwordSignupFields: "NONE"
   });
 
-  getGists = function getGists(user, callback) {
-    Meteor.call('getGists', user, callback);
-  }
-
 }

@@ -28,7 +28,6 @@ Profile = React.createClass({
   },
 
   componentDidMount() {
-    Meteor.call("getGists")
     if (!this.data.profile.profile.cohortNumber && this.props.editable) {
       this.setState({editing: true})
     }
@@ -110,8 +109,8 @@ Profile = React.createClass({
             <SkillsInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
           </div>
         </div>
-        <div className="container col-5">
-          <GistEmbed gistId='a02f32c70badc544dd9e'/>
+        <div className="col-5">
+          <Gist profile={profile} username={profile.services.github.username}/>
         </div>
       </div>
     )

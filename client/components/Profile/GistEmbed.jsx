@@ -1,4 +1,4 @@
-/////////// NOT MY CODE -- https://github.com/adamrneary/react-gist-embed //////////
+/////////// NOT MY CODE --> https://github.com/adamrneary/react-gist-embed //////////
 
 function adjustHeightWhenComplete(myFrame, myDoc) {
   if(myDoc.readyState === 'complete') {
@@ -10,15 +10,16 @@ function adjustHeightWhenComplete(myFrame, myDoc) {
   }
 };
 
-// https://gist.github.com/jeremiahlee/1748966
 GistEmbed = React.createClass({
   displayName: 'GistEmbed',
+  
   propTypes() {
     return {
       gistId: PropTypes.number.isRequired
     }
   },
-  componentDidMount: function() {
+
+  componentDidMount() {
 
     // Create an iframe, append it to this document where specified
     var gistFrame = document.createElement("iframe");

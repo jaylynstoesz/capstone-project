@@ -70,19 +70,20 @@ if (Meteor.isServer) {
 
     /////// Snippets Methods ///////
 
-    getGists: function getGists(user) {
+    getGists: function(username) {
+      console.log("**********************************");
       var GithubApi = Meteor.npmRequire('github');
       var github = new GithubApi({
           version: "3.0.0"
       });
 
       var gists = Async.runSync(function(done) {
-        github.gists.getFromUser({user: 'jaylynstoesz'}, function(err, data) {
+        github.gists.getFromUser({user: username}, function(err, data) {
           done(null, data);
         });
       });
-      console.log(gists.result);
-      return gists.result;
+        console.log(gists.result[0]);
+      return gists.result[0];
     },
 
     ////// Skills Methods //////
