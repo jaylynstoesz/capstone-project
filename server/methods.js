@@ -15,6 +15,11 @@ if (Meteor.isServer) {
     return Interests.find({})
   });
 
+  Meteor.publish("snippets", function () {
+    return Snippets.find({})
+  });
+
+
   Meteor.methods({
 
     ////// User Methods //////
@@ -44,20 +49,6 @@ if (Meteor.isServer) {
       Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
     },
 
-    sendEmail: function (to, from, subject, text) {
-      check([to, from, subject, text], [String]);
-
-      this.unblock();
-
-      Email.send({
-        to: to,
-        from: from,
-        // from: Meteor.user().emails[0].address,
-        subject: subject,
-        text: text
-      });
-    },
-
     sendText: function (to, body) {
       twilio = Twilio(Meteor.settings.TWILIO_ACCOUNT_SID, Meteor.settings.TWILIO_AUTH_TOKEN);
       return twilio.sendSms({
@@ -75,6 +66,23 @@ if (Meteor.isServer) {
           return responseData
         }
       });
+    },
+
+    /////// Snippets Methods ///////
+
+    getGists: function getGists(user) {
+      var GithubApi = Meteor.npmRequire('github');
+      var github = new GithubApi({
+          version: "3.0.0"
+      });
+
+      var gists = Async.runSync(function(done) {
+        github.gists.getFromUser({user: 'jaylynstoesz'}, function(err, data) {
+          done(null, data);
+        });
+      });
+      console.log(gists.result);
+      return gists.result;
     },
 
     ////// Skills Methods //////

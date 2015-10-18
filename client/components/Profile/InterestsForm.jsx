@@ -73,7 +73,7 @@ InterestsForm = React.createClass({
       var set = this.state.interestSelect.map((interest) => {
         return (
           <div
-            className="panel-small interest"
+            className="panel-small"
             id={interest.text}
             key={interest._id}
             onClick={this._onClick}

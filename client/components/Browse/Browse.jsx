@@ -18,7 +18,7 @@ Browse = React.createClass({
         {id: "sanFrancisco", checked: true, name: "San Francisco"},
         {id: "seattle", checked: true, name: "Seattle"}
       ],
-      sortBy: "firstName",
+      sortBy: "name",
     }
   },
 
@@ -97,8 +97,7 @@ Browse = React.createClass({
             <div className="container col-10">
               <h5>Sort By: </h5>
               <select ref="sortBy" value={this.state.sortBy} onChange={this._onChange} >
-                <option value="firstName">First Name</option>
-                <option value="lastName">Last Name</option>
+                <option value="name">First Name</option>
                 <option value="cohortType">Program</option>
                 <option value="corhortNumber">Cohort Number</option>
                 <option value="currentCity">City</option>

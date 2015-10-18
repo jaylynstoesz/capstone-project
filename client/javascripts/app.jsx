@@ -6,7 +6,14 @@ if (Meteor.isClient) {
   Meteor.subscribe("snippets");
 
   Accounts.ui.config({
-    passwordSignupFields: "EMAIL_ONLY"
+    requestPermissions: {
+      github: ['user']
+    },
+    // passwordSignupFields: "NONE"
   });
+
+  getGists = function getGists(user, callback) {
+    Meteor.call('getGists', user, callback);
+  }
 
 }

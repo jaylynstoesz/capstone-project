@@ -18,6 +18,7 @@ App = React.createClass({
   ],
 
   render() {
+    console.log(Meteor.userId());
     var divStyle = {
           backgroundImage: "url(/images/DenverSkyline.png)",
           backgroundRepeat: "no-repeat",

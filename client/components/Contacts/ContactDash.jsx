@@ -5,8 +5,8 @@ ContactDash = React.createClass({
   getMeteorData() {
     var contactList = this.props.currentUser.contacts || []
     return {
-      allContacts: Meteor.users.find({_id: {$in: contactList }}, {sort: {firstName: 1}}).fetch(),
-      allUsers: Meteor.users.find({_id: {$ne: this.props.currentUser._id }}, {sort: {firstName: 1}}).fetch()
+      allContacts: Meteor.users.find({_id: {$in: contactList }}, {sort: {name: 1}}).fetch(),
+      allUsers: Meteor.users.find({_id: {$ne: this.props.currentUser._id }}, {sort: {name: 1}}).fetch()
     }
   },
 
@@ -21,7 +21,7 @@ ContactDash = React.createClass({
         <div key={contact._id} contact={contact} className="col-10 panel-small">
           <a href={"/users/" + contact._id + "/message"}><span className="fa fa-envelope"></span></a>
           <a href={"/users/" + contact._id}>
-            <p><b>{contact.profile.firstName} {contact.profile.lastName} - {contact.profile.cohortType}{contact.profile.cohortNumber}</b></p>
+            <p><b>{contact.profile.name} - {contact.profile.cohortType}{contact.profile.cohortNumber}</b></p>
           </a>
           <p>{contact.profile.currentCity}, {contact.profile.currentState} - {contact.profile.company}</p>
         </div>
@@ -42,7 +42,7 @@ ContactDash = React.createClass({
       return (
         <div key={user.user._id} className="col-10 panel-small">
           <a href={"/users/" + user.user._id}>
-            <p><b>{user.user.profile.firstName} {user.user.profile.lastName} - {user.user.profile.cohortType}{user.user.profile.cohortNumber}</b></p>
+            <p><b>{user.user.profile.name} - {user.user.profile.cohortType}{user.user.profile.cohortNumber}</b></p>
             <p>{user.user.profile.currentCity}, {user.user.profile.currentState} - {user.user.profile.company}</p>
           </a>
         </div>
@@ -66,7 +66,7 @@ ContactDash = React.createClass({
           <h3>Recommended</h3>
         </div>
         <div className="col-8 recommended-list">
-          {this.renderRecommendations()}
+          {this.props.currentUser.profile ? this.renderRecommendations() : null}
         </div>
       </div>
     )

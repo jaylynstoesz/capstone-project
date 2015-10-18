@@ -104,7 +104,7 @@ SkillsForm = React.createClass({
           hidden
           id="sumbit-skill-button"
           type="submit"></button>
-        <div>
+        <div className="col-5">
           {this.renderSkillSelect()}
         </div>
       </form>

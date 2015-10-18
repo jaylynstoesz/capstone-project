@@ -1,7 +1,7 @@
 BasicInfoForm = React.createClass({
   getInitialState() {
     var allFields = this.allFields()
-    var profile = this.props.profile || {}
+    var profile = this.props.profile.profile || {}
     var formFields = {}
     for (var i = 0; i < allFields.length; i++) {
       formFields[allFields[i]] = profile[allFields[i]] || ""
@@ -24,11 +24,9 @@ BasicInfoForm = React.createClass({
       "currentState",
       "desiredCity",
       "desiredState",
-      "firstName",
       "github",
       "jobTitle",
       "jobType",
-      "lastName",
       "linkedin",
       "phone",
       "twitter"
@@ -117,11 +115,10 @@ BasicInfoForm = React.createClass({
             <input
               className="col-4"
               name="github"
-              onChange={this._onChange}
-              placeholder="https://github.com/zilkey"
+              readOnly
               ref="github"
               type="text"
-              value={this.state.github}/>
+              value={"https://github.com" + this.props.profile.services.github.username}/>
           </div>
           <div className="col-10">
             <label htmlFor="linkedin" className="col-half fa fa-linkedin social"></label>
@@ -148,24 +145,6 @@ BasicInfoForm = React.createClass({
           <div className="col-8">
             <h5>Basic Information</h5>
           </div>
-          <input
-            className="col-4"
-            name="firstName"
-            onChange={this._onChange}
-            placeholder="First Name"
-            ref="firstName"
-            required
-            type="text"
-            value={this.state.firstName} />
-          <input
-            className="col-4"
-            name="lastName"
-            onChange={this._onChange}
-            placeholder="Last Name"
-            ref="lastName"
-            required
-            type="text"
-            value={this.state.lastName}/>
           <div className="col-8">
             <select
               className="col-3"

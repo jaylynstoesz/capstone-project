@@ -5,7 +5,7 @@ BasicInfo = React.createClass({
     return (
       <div>
         <div id="basic-info" className="container" >
-          <h1>{profile.firstName} {profile.lastName}</h1>
+          <h1>{profile.name}</h1>
           <p>{profile.cohortType}{profile.cohortNumber} at {profile.cohortLocation}</p>
           <p>{profile.jobTitle} at {profile.company} in {profile.currentCity}, {profile.currentState}</p>
           <div className="container col-10 social-links">

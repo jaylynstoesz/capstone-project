@@ -28,7 +28,8 @@ Profile = React.createClass({
   },
 
   componentDidMount() {
-    if (!this.data.profile.profile && this.props.editable) {
+    Meteor.call("getGists")
+    if (!this.data.profile.profile.cohortNumber && this.props.editable) {
       this.setState({editing: true})
     }
     if (this.data.currentUser.contacts && this.data.currentUser.contacts.indexOf(this.props.page) >= 0) {
@@ -69,7 +70,7 @@ Profile = React.createClass({
     var profile = this.data.profile
     return (
       <div className="container col-6 profile">
-        {this.state.editing ? <BasicInfoForm profile={profile.profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
+        {this.state.editing ? <BasicInfoForm profile={profile} submitForm={this.submitForm}/> : this.renderBasicInfo() }
       </div>
     )
   },
@@ -110,14 +111,14 @@ Profile = React.createClass({
           </div>
         </div>
         <div className="container col-5">
-          <Pens />
+          <GistEmbed gistId='a02f32c70badc544dd9e'/>
         </div>
       </div>
     )
   },
 
   render() {
-    console.log(this.state.profile);
+    console.log(this.state.profile)
     return (
       <div>
         {this.state.profile ? this.renderProfile() : <h1>Oops! User not found.</h1>}
