@@ -26,10 +26,6 @@ BasicInfo = React.createClass({
                               </a> : null}
           </div>
         </div>
-        <div className="container col-5 panel">
-          <h4>About</h4>
-          <p>{profile.bio}</p>
-        </div>
       </div>
     )
   },

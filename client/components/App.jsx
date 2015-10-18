@@ -8,7 +8,6 @@ App = React.createClass({
     }
   },
 
-
   campuses: [
     {id: "boulder", name: "Boulder", src: "/images/boulder.jpg"},
     {id: "denverPlatte", name: "Denver - Platte", src: "/images/coorsfield.jpg"},
@@ -17,7 +16,6 @@ App = React.createClass({
     {id: "sanFrancisco", name: "San Francisco", src: "/images/sanfrancisco.jpg"},
     {id: "seattle", name: "Seattle", src: "/images/seattle2.jpg"}
   ],
-
 
   render() {
     var divStyle = {

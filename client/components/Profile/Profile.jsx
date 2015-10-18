@@ -96,6 +96,10 @@ Profile = React.createClass({
           <BasicInfo profile={profile}/>
         </div>
         <div className="col-5">
+          <div className="container col-10 panel">
+            <h4>About</h4>
+            <p>{profile.profile.bio}</p>
+          </div>
           <div className="col-10 panel">
             <JobInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
           </div>
@@ -104,6 +108,9 @@ Profile = React.createClass({
             {this.props.editable ? <SkillsForm/> : null }
             <SkillsInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
           </div>
+        </div>
+        <div className="container col-5">
+          <Pens />
         </div>
       </div>
     )
