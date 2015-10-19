@@ -54,9 +54,7 @@ if (Meteor.isServer) {
     },
 
     sendText: function (to, body) {
-      // twilio = Twilio("ACb5154ba73d4c3ee96f2a8e114168d278", "4c51e9c91bf216504d7f1e45185feebc");
       twilio = Twilio(Meteor.settings.TWILIO_ACCOUNT_SID, Meteor.settings.TWILIO_AUTH_TOKEN);
-      console.log("*********** Sending text *************");
       return twilio.sendSms({
         to: to,
         from: '+17206135663',
@@ -87,7 +85,6 @@ if (Meteor.isServer) {
           done(null, data);
         });
       });
-      console.log("********** GIST RESULT ***********", gists.result);
       return gists.result[0];
     },
 

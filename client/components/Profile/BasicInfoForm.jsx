@@ -45,6 +45,11 @@ BasicInfoForm = React.createClass({
     this.validateForm()
   },
 
+  deleteAccount() {
+    Meteor.call("destroyUser")
+    FlowRouter.go("/users")
+  },
+
   handleSubmit(event) {
     event.preventDefault();
     var userObject = {}
@@ -328,6 +333,7 @@ BasicInfoForm = React.createClass({
         </form>
         <div className="container col-8">
           <button
+            id="delete-account-button"
             className="button"
             onClick={this.deleteAccount}>
             Delete Account

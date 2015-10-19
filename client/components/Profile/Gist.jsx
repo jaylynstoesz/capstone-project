@@ -1,5 +1,11 @@
 Gist = React.createClass({
 
+  getInitialState() {
+    return {
+      gist: false
+    }
+  },
+
   componentDidMount() {
     Meteor.call("getGists", this.props.username, function (err, res) {
       this.setState({gist: res})
@@ -14,9 +20,12 @@ Gist = React.createClass({
   },
 
   render() {
+    if (this.state.gist) {
+      var description = this.state.gist.description
+    }
     return (
       <div>
-        <p>{this.state ? this.state.gist.description : null}</p>
+        <p>{description ? description : null}</p>
         {this.renderGist()}
       </div>
     )
