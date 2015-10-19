@@ -26,7 +26,6 @@ Messenger = React.createClass({
   handleSubmit() {
     event.preventDefault()
     var sender = this.state.currentUser
-    console.log(sender);
     var recipient = this.state.profile
 
     var body = "Message from " + sender.profile.name + " on the gSchool Alumni network: " +  React.findDOMNode(this.refs.body).value.trim() + " - Respond at " + sender.profile.phone + " or " + sender.services.github.email

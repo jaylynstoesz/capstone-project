@@ -65,8 +65,6 @@ if (Meteor.isServer) {
           return err
         }
         if (!err) {
-          console.log(responseData.from);
-          console.log(responseData.body);
           return responseData
         }
       });
@@ -192,7 +190,6 @@ if (Meteor.isServer) {
 
     testMe: function () {
       console.log("******************** TEST ********************");
-      console.log(Meteor.settings);
     }
 
   })

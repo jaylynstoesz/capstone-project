@@ -182,7 +182,7 @@ BasicInfoForm = React.createClass({
             ref="name"
             required
             type="text"
-            value={this.props.profile.services.github ? this.props.profile.services.github.name : this.state.name}/>
+            value={this.props.profile.services.github ? this.props.profile.profile.name : this.state.name}/>
           <div className="col-8">
             <select
               className="col-3"

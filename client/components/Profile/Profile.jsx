@@ -90,6 +90,7 @@ Profile = React.createClass({
     } else {
       gitHubUsername = null
     }
+    console.log("github:", gitHubUsername);
     return (
       <div className="col-10">
         <div className="col-10">
