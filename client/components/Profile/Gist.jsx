@@ -15,10 +15,9 @@ Gist = React.createClass({
 
   render() {
     return (
-      <div className="col-10 panel">
-        <h3>My latest Gist</h3>
-        {this.renderGist()}
+      <div>
         <p>{this.state ? this.state.gist.description : null}</p>
+        {this.renderGist()}
       </div>
     )
   }

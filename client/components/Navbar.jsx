@@ -1,5 +1,6 @@
 Navbar = React.createClass({
   render() {
+    console.log("!!!!", this.props.currentUser);
     return (
       <div className="col-10 navbar-component">
         <div className="container col-6">

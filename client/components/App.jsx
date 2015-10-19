@@ -26,7 +26,7 @@ App = React.createClass({
         };
     if (this.data.currentUser) {
       for (var i = 0; i < this.campuses.length; i++) {
-        if (this.data.currentUser.profile.cohortLocation === this.campuses[i].name) {
+        if (this.data.currentUser.profile && this.data.currentUser.profile.cohortLocation === this.campuses[i].name) {
           divStyle.backgroundImage = "url(" + this.campuses[i].src + ")"
         }
       }

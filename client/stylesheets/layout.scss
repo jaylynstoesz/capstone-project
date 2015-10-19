@@ -1,5 +1,11 @@
+
+
 * {
   box-sizing: border-box;
+}
+
+html {
+  overflow: hidden;
 }
 
 body {
@@ -13,8 +19,15 @@ body {
 
 .contact-list, .recommended-list {
   overflow: scroll !important;
-  height: 29em;
   float: right;
+}
+
+.contact-list {
+  height: 29em;
+}
+
+.recommended-list {
+  height: 15em;
 }
 
 .recommended-list {
@@ -32,6 +45,7 @@ body {
 .fa-envelope {
   padding: 5px;
 }
+
 
 .messenger {
   h5 {
@@ -71,6 +85,11 @@ body {
   h3 {
     margin-top: 0px;
   }
+}
+
+.post-list {
+  overflow: scroll;
+  max-height: 30em;
 }
 
 .profile, .browse, .messenger {

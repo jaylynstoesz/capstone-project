@@ -15,8 +15,8 @@ if (Meteor.isServer) {
     return Interests.find({})
   });
 
-  Meteor.publish("snippets", function () {
-    return Snippets.find({})
+  Meteor.publish("posts", function () {
+    return Posts.find({})
   });
 
 
@@ -31,6 +31,10 @@ if (Meteor.isServer) {
         setModifier["profile." + props[i]] = userObject[props[i]]
       }
       Meteor.users.update(Meteor.user()._id, { $set: setModifier })
+    },
+
+    destroyUser: function (userId) {
+      Meteor.users.remove(Meteor.userId())
     },
 
     addContact: function (userId) {
@@ -50,7 +54,9 @@ if (Meteor.isServer) {
     },
 
     sendText: function (to, body) {
+      // twilio = Twilio("ACb5154ba73d4c3ee96f2a8e114168d278", "4c51e9c91bf216504d7f1e45185feebc");
       twilio = Twilio(Meteor.settings.TWILIO_ACCOUNT_SID, Meteor.settings.TWILIO_AUTH_TOKEN);
+      console.log("*********** Sending text *************");
       return twilio.sendSms({
         to: to,
         from: '+17206135663',
@@ -68,13 +74,12 @@ if (Meteor.isServer) {
       });
     },
 
-    /////// Snippets Methods ///////
+    /////// Gist Methods ///////
 
     getGists: function(username) {
-      console.log("**********************************");
       var GithubApi = Meteor.npmRequire('github');
       var github = new GithubApi({
-          version: "3.0.0"
+        version: "3.0.0"
       });
 
       var gists = Async.runSync(function(done) {
@@ -82,7 +87,7 @@ if (Meteor.isServer) {
           done(null, data);
         });
       });
-        console.log(gists.result[0]);
+      console.log("********** GIST RESULT ***********", gists.result);
       return gists.result[0];
     },
 
@@ -110,6 +115,30 @@ if (Meteor.isServer) {
         return skill !== skillId
       })
       Meteor.users.update(Meteor.user()._id, { $set: {skills: skillRemoved} })
+    },
+
+    ////// Post Methods //////
+
+    createPost: function (postObject) {
+      if (! Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
+      postObject.owner = Meteor.userId()
+      postObject.createdAt = new Date()
+      Posts.insert(postObject)
+    },
+
+    updatePost: function (postObject) {
+      var props = Object.keys(postObject)
+      var setModifier = {};
+      for (var i = 0; i < props.length; i++) {
+        setModifier[props[i]] = postObject[props[i]]
+      }
+      Posts.update(postObject._id, { $set: setModifier })
+    },
+
+    destroyPost: function (postId) {
+      Posts.remove({_id: postId})
     },
 
     ////// Interests Methods //////

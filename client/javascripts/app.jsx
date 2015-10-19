@@ -3,7 +3,7 @@ if (Meteor.isClient) {
   Meteor.subscribe("userData");
   Meteor.subscribe("skills");
   Meteor.subscribe("interests");
-  Meteor.subscribe("snippets");
+  Meteor.subscribe("posts");
 
   Accounts.ui.config({
     requestPermissions: {

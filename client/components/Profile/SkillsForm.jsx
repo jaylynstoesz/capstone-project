@@ -51,7 +51,6 @@ SkillsForm = React.createClass({
 
   _onChange() {
     this.validateForm()
-    validateField(event.target)
     this.setState({text: event.target.value}, )
     this.setState({skillSelect: fuzzyMatch(this.data.allSkills, event.target.value, 1)})
   },

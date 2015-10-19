@@ -39,14 +39,16 @@ ContactDash = React.createClass({
       return 0;
     }.bind(this))
     return sorted.map((user) => {
-      return (
-        <div key={user.user._id} className="col-10 panel-small">
-          <a href={"/users/" + user.user._id}>
-            <p><b>{user.user.profile.name} - {user.user.profile.cohortType}{user.user.profile.cohortNumber}</b></p>
-            <p>{user.user.profile.currentCity}, {user.user.profile.currentState} - {user.user.profile.company}</p>
-          </a>
-        </div>
-      )
+      if (user.user.profile) {
+        return (
+          <div key={user.user._id} className="col-10 panel-small">
+            <a href={"/users/" + user.user._id}>
+              <p><b>{user.user.profile.name} - {user.user.profile.cohortType}{user.user.profile.cohortNumber}</b></p>
+              <p>{user.user.profile.currentCity}, {user.user.profile.currentState} - {user.user.profile.company}</p>
+            </a>
+          </div>
+        )
+      }
     })
   },
 
@@ -63,7 +65,7 @@ ContactDash = React.createClass({
           {this.renderContacts()}
         </div>
         <div className="col-8 contact-header">
-          <h3>Recommended</h3>
+          <h3>Who to talk to</h3>
         </div>
         <div className="col-8 recommended-list">
           {this.props.currentUser.profile ? this.renderRecommendations() : null}

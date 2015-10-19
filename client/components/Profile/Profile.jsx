@@ -28,12 +28,18 @@ Profile = React.createClass({
   },
 
   componentDidMount() {
-    if (!this.data.profile.profile.cohortNumber && this.props.editable) {
+    if (!this.data.profile.profile) {
+      this.setState({editing: true})
+    } else if (!this.data.profile.profile.cohortNumber && this.props.editable) {
       this.setState({editing: true})
     }
     if (this.data.currentUser.contacts && this.data.currentUser.contacts.indexOf(this.props.page) >= 0) {
       this.setState({saved : true})
     }
+  },
+
+  componentWillUnmount() {
+    this.setState({profile: null})
   },
 
   getProfile(userId) {
@@ -76,6 +82,14 @@ Profile = React.createClass({
 
   renderBasicInfo() {
     var profile = this.data.profile
+    var gitHubUsername
+    if (profile.services.github) {
+      gitHubUsername = profile.services.github.username
+    } else if (profile.profile.github) {
+      gitHubUsername = profile.profile.github.split("/")[3]
+    } else {
+      gitHubUsername = null
+    }
     return (
       <div className="col-10">
         <div className="col-10">
@@ -98,7 +112,7 @@ Profile = React.createClass({
         <div className="col-5">
           <div className="container col-10 panel">
             <h4>About</h4>
-            <p>{profile.profile.bio}</p>
+            <p>{profile.profile ? profile.profile.bio : "This user doesn't have a bio yet."}</p>
           </div>
           <div className="col-10 panel">
             <JobInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
@@ -110,14 +124,21 @@ Profile = React.createClass({
           </div>
         </div>
         <div className="col-5">
-          <Gist profile={profile} username={profile.services.github.username}/>
+          <div className="col-10 panel post-list">
+            <h4>Thoughts, resources, and questions</h4>
+            {this.props.editable ? <PostForm type="create"/> : null }
+            <PostInfo clickToAdd={this.clickToAdd} profile={profile} editable={this.props.editable}/>
+          </div>
+          <div className="col-10 panel">
+            <h4>My latest Gist</h4>
+            { gitHubUsername !== null ? <Gist profile={profile} username={gitHubUsername}/> : "No Gists yet!" }
+          </div>
         </div>
       </div>
     )
   },
 
   render() {
-    console.log(this.state.profile)
     return (
       <div>
         {this.state.profile ? this.renderProfile() : <h1>Oops! User not found.</h1>}

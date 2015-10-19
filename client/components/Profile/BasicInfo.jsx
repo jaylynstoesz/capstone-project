@@ -24,6 +24,12 @@ BasicInfo = React.createClass({
                                 href={profile.twitter}
                                 target="_blank">
                               </a> : null}
+            {profile.slack ? <a
+                                className="col-2 fa fa-slack social"
+                                href={"https://gschool.slack.com/messages/" + profile.slack}
+                                target="_blank">
+                                <span> {profile.slack}</span>
+                              </a> : null}
           </div>
         </div>
       </div>
@@ -33,7 +39,7 @@ BasicInfo = React.createClass({
   render() {
     return (
       <div>
-        {this.props.profile.profile ? this.renderInfo() : <h1>Add some info</h1>}
+        {this.props.profile.profile ? this.renderInfo() : <h3>Career Interests</h3>}
       </div>
     )
   }

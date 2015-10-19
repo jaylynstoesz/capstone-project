@@ -1,9 +1,9 @@
-@mixin transition() {
-  -webkit-transition: background 0.3s;
-  -moz-transition: background 0.3s;
-  -o-transition: background 0.3s;
-  -ms-transition: background 0.3s;
-  transition: background 0.3s;
+@mixin transition($prop) {
+  -webkit-transition: $prop 0.3s;
+  -moz-transition: $prop 0.3s;
+  -o-transition: $prop 0.3s;
+  -ms-transition: $prop 0.3s;
+  transition: $prop 0.3s;
 }
 
 $primary: #F7901E;
@@ -19,7 +19,7 @@ body, input, textarea {
 }
 
 div {
-  @include transition;
+  @include transition(background);
 }
 
 input, textarea {
@@ -115,7 +115,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-small {
-  @include transition;
+  @include transition(background);
   background-color: $blackish;
   color: $white;
   a {
@@ -124,6 +124,6 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-small:hover {
-  @include transition;
+  @include transition(background);
   background-color: $black;
 }

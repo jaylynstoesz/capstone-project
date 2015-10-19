@@ -12,6 +12,12 @@ BasicInfoForm = React.createClass({
     return formFields
   },
 
+  componentWillMount() {
+    if (Meteor.userId() !== this.props.profile._id) {
+      FlowRouter.go("/users")
+    }
+  },
+
   allFields() {
     return [
       "allowText",
@@ -28,7 +34,9 @@ BasicInfoForm = React.createClass({
       "jobTitle",
       "jobType",
       "linkedin",
+      "name",
       "phone",
+      "slack",
       "twitter"
     ]
   },
@@ -115,10 +123,12 @@ BasicInfoForm = React.createClass({
             <input
               className="col-4"
               name="github"
-              readOnly
+              placeholder="https://www.github.com/zilkey"
+              readOnly={this.props.profile.services.github}
+              onChange={this._onChange}
               ref="github"
               type="text"
-              value={"https://github.com" + this.props.profile.services.github.username}/>
+              value={this.props.profile.services.github ? "https://github.com" + this.props.profile.services.github.username : this.state.github}/>
           </div>
           <div className="col-10">
             <label htmlFor="linkedin" className="col-half fa fa-linkedin social"></label>
@@ -142,9 +152,32 @@ BasicInfoForm = React.createClass({
               type="text"
               value={this.state.twitter}/>
           </div>
+          <div className="col-10">
+            <label htmlFor="slack" className="col-half fa fa-slack social"></label>
+            <input
+              className="col-4"
+              name="slack"
+              onChange={this._onChange}
+              placeholder="@jeffdean"
+              ref="slack"
+              type="text"
+              value={this.state.slack}/>
+          </div>
           <div className="col-8">
             <h5>Basic Information</h5>
           </div>
+          <div className="col-8">
+            <h5>What's your full name? </h5>
+          </div>
+          <input
+            className="col-4"
+            name="name"
+            onChange={this._onChange}
+            placeholder="Jeff Dean"
+            ref="name"
+            required
+            type="text"
+            value={this.props.profile.services.github ? this.props.profile.services.github.name : this.state.name}/>
           <div className="col-8">
             <select
               className="col-3"
@@ -293,6 +326,13 @@ BasicInfoForm = React.createClass({
             </button>
           </div>
         </form>
+        <div className="container col-8">
+          <button
+            className="button"
+            onClick={this.deleteAccount}>
+            Delete Account
+          </button>
+        </div>
       </div>
     )
   }

@@ -1,18 +1,17 @@
-TodoForm = React.createClass({
+PostForm = React.createClass({
 
   allFields() {
     return [
       "text",
-      "deadline",
     ]
   },
 
   getInitialState() {
     var allFields = this.allFields()
-    var todo = this.props.todo || {}
+    var post = this.props.post || {}
     var formFields = {}
     for (var i = 0; i < allFields.length; i++) {
-      formFields[allFields[i]] = todo[allFields[i]] || ""
+      formFields[allFields[i]] = post[allFields[i]] || ""
     }
     return formFields
   },
@@ -23,20 +22,19 @@ TodoForm = React.createClass({
 
   handleSubmit(event) {
     event.preventDefault()
-    var todoObject = {}
+    var postObject = {}
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]]).value.trim()
-      todoObject[allFields[i]] = DOMNode
+      postObject[allFields[i]] = DOMNode
     }
-    todoObject.private = false
+    postObject.private = false
     if (this.props.type === "create") {
-      Meteor.call("createTodo", todoObject)
+      Meteor.call("createPost", postObject)
       this.setState({text: ""})
-      this.setState({deadline: ""})
     } else if (this.props.type === "update"){
-      todoObject._id = this.props.todo._id
-      Meteor.call("updateTodo", todoObject)
+      postObject._id = this.props.post._id
+      Meteor.call("updatePost", postObject)
       this.props.toggleForm()
     }
   },
@@ -46,7 +44,7 @@ TodoForm = React.createClass({
     var allFields = this.allFields()
     for (var i = 0; i < allFields.length; i++) {
       var DOMNode = React.findDOMNode(this.refs[allFields[i]])
-      if (DOMNode.value === "" && DOMNode.required) {
+      if (DOMNode.value === "") {
         this.setState({canSubmit: false})
       }
     }
@@ -54,7 +52,6 @@ TodoForm = React.createClass({
 
   _onChange: function() {
     this.validateForm()
-    validateField(event.target)
     var setModifier = {}
     setModifier[event.target.name] = event.target.value
     this.setState(setModifier);
@@ -65,21 +62,13 @@ TodoForm = React.createClass({
       <form className="col-9" onSubmit={this.handleSubmit}>
         <input
           className="col-10"
+          maxLength="140"
           name="text"
           onChange={this._onChange}
-          placeholder="Add a new to-do"
+          placeholder="Say something interesting."
           ref="text"
-          required
           type="text"
           value={this.state.text} />
-        <label htmlFor="deadline">Deadline (optional)</label>
-        <input
-          className="col-6 deadline"
-          ref="deadline"
-          name="deadline"
-          onChange={this._onChange}
-          type="date"
-          value={this.state.deadline} />
         <button
           disabled={!this.state.canSubmit}
           hidden

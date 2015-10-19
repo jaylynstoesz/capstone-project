@@ -47,7 +47,6 @@ InterestsForm = React.createClass({
 
   _onChange() {
     this.validateForm()
-    validateField(event.target)
     this.setState({text: event.target.value}, )
     this.setState({interestSelect: fuzzyMatch(this.data.allInterests, event.target.value, 1)})
   },

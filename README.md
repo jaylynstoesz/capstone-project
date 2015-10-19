@@ -24,7 +24,8 @@ http://gschool_alumni_network.meteor.com/
 - Kadira:ReactLayout
 - OKGrow: Promise
 - FourSeven: SCSS
+- Accolver: twilio-meteor
+- Momentjs: moment
+- Meteorhacks:npm
 - React-gist-embed
 - FontAwesome
-- Accolver:twilio-meteor
-- Meteorhacks:npm

@@ -4,7 +4,7 @@ Browse = React.createClass({
 
   getMeteorData() {
     return {
-      allUsers: Meteor.users.find({_id: {$ne: Meteor.userId()}}, {sort: {firstName: 1}}).fetch()
+      allUsers: Meteor.users.find({_id: {$ne: Meteor.userId()}}).fetch()
     }
   },
 
@@ -62,13 +62,15 @@ Browse = React.createClass({
   renderUsers() {
     allUsers = this.data.allUsers.sort(function (a, b) {
       var sortBy = this.state.sortBy
-      if (a.profile[sortBy] > b.profile[sortBy]) { return 1 }
-      if (a.profile[sortBy] < b.profile[sortBy]) { return -1 }
+      if (a.profile && b.profile) {
+        if (a.profile[sortBy] > b.profile[sortBy]) { return 1 }
+        if (a.profile[sortBy] < b.profile[sortBy]) { return -1 }
+      }
       return 0;
     }.bind(this))
     return allUsers.map((user) => {
       for (var i = 0; i < this.state.campuses.length; i++) {
-        if (user.profile.cohortLocation === this.state.campuses[i].name && this.state.campuses[i].checked) {
+        if (user.profile && user.profile.cohortLocation === this.state.campuses[i].name && this.state.campuses[i].checked) {
           user.viewing = true
         }
       }
@@ -78,7 +80,7 @@ Browse = React.createClass({
             key={user._id}
             user={user}>
             <div className="container col-10">
-              <h2>{user.profile.firstName} {user.profile.lastName}</h2>
+              <h2>{user.profile.name}</h2>
               <p>{user.profile.cohortType}{user.profile.cohortNumber} at {user.profile.cohortLocation}</p>
               <p>{user.profile.jobTitle} at {user.profile.company}</p>
               <p>Located in {user.profile.currentCity}, {user.profile.currentState}</p>

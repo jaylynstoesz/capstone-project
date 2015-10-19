@@ -14,6 +14,9 @@ Todo = React.createClass({
   },
 
   renderTodo() {
+    if (this.props.todo.deadline) {
+      var deadline = parseDate(this.props.todo.deadline)
+    }
     return (
       <div className="col-8 panel-small">
         <div className="col-10">
@@ -23,7 +26,7 @@ Todo = React.createClass({
         <div className="col-10">
           <p>{this.props.todo.text}</p>
           <p>
-            <b>{this.props.todo.deadline ? "Due: " + this.props.todo.deadline : null}</b>
+            <b>{this.props.todo.deadline ? "Due: " + moment(deadline).utc().format("ddd, MMMM Do") : null}</b>
           </p>
         </div>
       </div>

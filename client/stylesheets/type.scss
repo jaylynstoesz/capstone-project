@@ -1,5 +1,13 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700,600);
 
+@mixin transition($prop) {
+  -webkit-transition: $prop 0.3s;
+  -moz-transition: $prop 0.3s;
+  -o-transition: $prop 0.3s;
+  -ms-transition: $prop 0.3s;
+  transition: $prop 0.3s;
+}
+
 html {font-size: 0.85em;}
 
 body {
@@ -36,15 +44,37 @@ h5 {font-size: 1.1em;}
 
 input, textarea, select {font-size: 0.85em;}
 
-small, .font_small {font-size: 0.6em;}
+small, .font_small {
+  font-size: 0.7em;
+  float: right;
+}
 
 .button {
   font-size: 0.8em;
 }
 
+.fa-slack {
+  text-align: left;
+  span {
+    @include transition(display);
+    font-size: 0.8em;
+    vertical-align: text-top;
+    padding-left: 3px;
+    display: none;
+  }
+}
+
+.fa-slack:hover {
+  span {
+    @include transition(display);
+    display: inline;
+  }
+}
+
 .social-links {
   margin-left: 40%;
 }
+
 
 span.button {
   margin: 2.25%;

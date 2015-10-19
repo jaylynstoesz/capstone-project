@@ -4,7 +4,7 @@ JobInfo = React.createClass({
     var profile = this.props.profile.profile
     return (
       <div id="job-info" className="col-10">
-        <h4>Career Interests</h4>
+        <h4>Career interests</h4>
         <p>{profile.jobType} in {profile.desiredCity}, {profile.desiredState}</p>
         {this.props.editable ? <InterestsForm/> : null }
         <InterestsInfo clickToAdd={this.props.clickToAdd} profile={this.props.profile} editable={this.props.editable}/>
