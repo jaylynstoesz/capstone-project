@@ -23,6 +23,12 @@ a {
 
 p {margin-bottom: 0.5em; margin-top: 0.5em;}
 
+header {
+  text-align: center;
+  font-size: 4.0em;
+  text-shadow: 2px 2px 2px black;
+}
+
 h1, h2, h3, h4, h5 {
   margin: 1.414em 0 0.5em;
   font-weight: inherit;
@@ -47,6 +53,11 @@ input, textarea, select {font-size: 0.85em;}
 small, .font_small {
   font-size: 0.7em;
   float: right;
+}
+
+.about {
+  text-align: center;
+  margin-left: 20%;
 }
 
 .button {

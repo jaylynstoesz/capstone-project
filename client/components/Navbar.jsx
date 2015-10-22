@@ -3,7 +3,7 @@ Navbar = React.createClass({
     return (
       <div className="col-10 navbar-component">
         <div className="container col-6">
-          <a href={"/users"}>
+          <a href={"/"}>
             <h3><img src="/images/galvanize.png"></img> Alumni Network</h3>
           </a>
         </div>

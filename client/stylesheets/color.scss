@@ -1,9 +1,9 @@
-@mixin transition($prop) {
-  -webkit-transition: $prop 0.3s;
-  -moz-transition: $prop 0.3s;
-  -o-transition: $prop 0.3s;
-  -ms-transition: $prop 0.3s;
-  transition: $prop 0.3s;
+@mixin transition() {
+  -webkit-transition: background 0.3s;
+  -moz-transition: background 0.3s;
+  -o-transition: background 0.3s;
+  -ms-transition: background 0.3s;
+  transition: background 0.3s;
 }
 
 $primary: #F7901E;
@@ -19,7 +19,7 @@ body, input, textarea {
 }
 
 div {
-  @include transition(background);
+  @include transition();
 }
 
 input, textarea {
@@ -27,9 +27,9 @@ input, textarea {
 }
 
 input:focus, select:focus, button:focus {
-    outline: none !important;
-    border: 1px solid $primary;
-    box-shadow: 0 0 4px $primary;
+  outline: none !important;
+  border: 1px solid $primary;
+  box-shadow: 0 0 4px $primary;
 }
 
 label.small {
@@ -88,6 +88,31 @@ h1, h2, h3, h4, h5 {
   border: 2px solid $primary-dark;
 }
 
+.landing-page {
+  background-color: $black;
+  color: $white;
+  tr:hover {
+    h4, .fa {
+      color: $white;
+    }
+  }
+}
+
+.landing-button {
+  background-color: $primary;
+  color: $white;
+}
+.landing-button:hover {
+  background-color: $primary-dark;
+}
+
+.landing-tiles div:hover {
+  background-color: $primary;
+  h4 {
+    color: $black;
+  }
+}
+
 .navbar-component {
   background: $black;
   opacity: 1.0;
@@ -115,7 +140,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-small {
-  @include transition(background);
+  @include transition();
   background-color: $blackish;
   color: $white;
   a {
@@ -124,6 +149,10 @@ h1, h2, h3, h4, h5 {
 }
 
 .panel-small:hover {
-  @include transition(background);
+  @include transition();
   background-color: $black;
+}
+
+#h-white {
+  color: $white;
 }
