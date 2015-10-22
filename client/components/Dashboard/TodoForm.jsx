@@ -36,7 +36,9 @@ TodoForm = React.createClass({
       this.setState({deadline: ""})
     } else if (this.props.type === "update"){
       todoObject._id = this.props.todo._id
-      Meteor.call("updateTodo", todoObject)
+      Meteor.call("updateTodo", todoObject, function (err, result) {
+        if (err) {console.log(err);}
+      })
       this.props.toggleForm()
     }
   },

@@ -1,7 +1,4 @@
 FlowRouter.route('/', {
-  // triggersEnter: function(context, redirect) {
-  //   redirect('/users');
-  // }
   action: function () {
     ReactLayout.render(Landing, document.getElementById('render-app'))
   }

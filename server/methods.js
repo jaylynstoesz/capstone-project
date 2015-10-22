@@ -30,7 +30,7 @@ if (Meteor.isServer) {
       for (var i = 0; i < props.length; i++) {
         setModifier["profile." + props[i]] = userObject[props[i]]
       }
-      Meteor.users.update(Meteor.user()._id, { $set: setModifier })
+      Meteor.users.update(Meteor.userId(), { $set: setModifier })
     },
 
     destroyUser: function (userId) {
@@ -42,7 +42,7 @@ if (Meteor.isServer) {
       if (contactList.indexOf(userId) < 0) {
         contactList.push(userId)
       }
-      Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactList} })
+      Meteor.users.update(Meteor.userId(), { $set: {contacts: contactList} })
     },
 
     removeContact: function (userId) {
@@ -50,7 +50,7 @@ if (Meteor.isServer) {
       var contactRemoved = contactList.filter(function (contact) {
         return contact !== userId
       })
-      Meteor.users.update(Meteor.user()._id, { $set: {contacts: contactRemoved} })
+      Meteor.users.update(Meteor.userId(), { $set: {contacts: contactRemoved} })
     },
 
     sendText: function (to, body) {
@@ -101,7 +101,7 @@ if (Meteor.isServer) {
       if (skillList.indexOf(skillId) < 0) {
         skillList.push(skillId)
       }
-      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillList} })
+      Meteor.users.update(Meteor.userId(), { $set: {skills: skillList} })
     },
 
     removeSkillFromUser: function (skillId) {
@@ -109,7 +109,7 @@ if (Meteor.isServer) {
       var skillRemoved = skillList.filter(function (skill) {
         return skill !== skillId
       })
-      Meteor.users.update(Meteor.user()._id, { $set: {skills: skillRemoved} })
+      Meteor.users.update(Meteor.userId(), { $set: {skills: skillRemoved} })
     },
 
     ////// Post Methods //////
@@ -151,7 +151,7 @@ if (Meteor.isServer) {
       if (interestList.indexOf(interestId) < 0) {
         interestList.push(interestId)
       }
-      Meteor.users.update(Meteor.user()._id, { $set: {interests: interestList} })
+      Meteor.users.update(Meteor.userId(), { $set: {interests: interestList} })
     },
 
     removeInterestFromUser: function (interestId) {
@@ -159,7 +159,7 @@ if (Meteor.isServer) {
       var interestRemoved = interestList.filter(function (interest) {
         return interest !== interestId
       })
-      Meteor.users.update(Meteor.user()._id, { $set: {interests: interestRemoved} })
+      Meteor.users.update(Meteor.userId(), { $set: {interests: interestRemoved} })
     },
 
     ////// Todo Methods //////
@@ -174,6 +174,9 @@ if (Meteor.isServer) {
     },
 
     updateTodo: function (todoObject) {
+      if (! Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
       var props = Object.keys(todoObject)
       var setModifier = {};
       for (var i = 0; i < props.length; i++) {

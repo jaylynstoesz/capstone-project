@@ -12,7 +12,6 @@ Profile = React.createClass({
   getInitialState() {
     return {
       editing: false,
-      saved: false,
     }
   },
 
@@ -26,6 +25,8 @@ Profile = React.createClass({
     this.setState({profile: this.data.profile})
     if (this.props.currentUser && this.props.currentUser.contacts && this.props.currentUser.contacts.indexOf(this.props.page) >= 0) {
       this.setState({saved : true})
+    } else {
+      this.setState({saved : false})
     }
   },
 
