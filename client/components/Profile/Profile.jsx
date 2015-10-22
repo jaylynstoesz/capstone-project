@@ -4,7 +4,7 @@ Profile = React.createClass({
 
   getMeteorData() {
     return {
-      currentUser: this.getProfile(this.props.currentUser),
+      currentUser: this.props.currentUser,
       profile: this.getProfile(this.props.page)
     }
   },
@@ -24,7 +24,9 @@ Profile = React.createClass({
 
   componentWillMount() {
     this.setState({profile: this.data.profile})
-    this.setState({currentUser: this.data.currentUser})
+    if (this.props.currentUser && this.props.currentUser.contacts && this.props.currentUser.contacts.indexOf(this.props.page) >= 0) {
+      this.setState({saved : true})
+    }
   },
 
   componentDidMount() {
@@ -32,9 +34,6 @@ Profile = React.createClass({
       this.setState({editing: true})
     } else if (!this.data.profile.profile.cohortNumber && this.props.editable) {
       this.setState({editing: true})
-    }
-    if (this.data.currentUser.contacts && this.data.currentUser.contacts.indexOf(this.props.page) >= 0) {
-      this.setState({saved : true})
     }
   },
 
@@ -90,7 +89,6 @@ Profile = React.createClass({
     } else {
       gitHubUsername = null
     }
-    console.log("github:", gitHubUsername);
     return (
       <div className="col-10">
         <div className="col-10">
@@ -132,7 +130,7 @@ Profile = React.createClass({
           </div>
           <div className="col-10 panel">
             <h4>My latest Gist</h4>
-            { gitHubUsername !== null ? <Gist profile={profile} username={gitHubUsername}/> : "No Gists yet!" }
+            { gitHubUsername !== null ? <Gist username={gitHubUsername}/> : "No Gists yet!" }
           </div>
         </div>
       </div>
