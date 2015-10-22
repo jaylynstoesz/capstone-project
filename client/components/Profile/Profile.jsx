@@ -46,7 +46,7 @@ Profile = React.createClass({
     if (Meteor.users.findOne({ _id: userId }) !== undefined) {
       return Meteor.users.findOne({ _id: userId });
     } else {
-      return false
+      FlowRouter.go("/users")
     }
   },
 
