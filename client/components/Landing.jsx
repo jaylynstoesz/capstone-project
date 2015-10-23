@@ -34,7 +34,7 @@ Landing = React.createClass({
           <div className="container col-10 landing-contact">
             <div className="container">
               <header>Jaylyn Stoesz</header>
-              <h3 id="h-white">Full Stack Developer</h3>
+              <h3 id="h-white">Full Stack Web Developer</h3>
               <table>
                 <tr>
                   <td><h4 className="fa fa-envelope social"></h4></td>
